@@ -1,0 +1,2 @@
+# 统一 LF 换行，避免 Windows 检出时转 CRLF 造成噪音
+* text=auto eol=lf
