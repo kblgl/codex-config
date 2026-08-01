@@ -13,7 +13,7 @@
 |---|---|
 | `~/.claude/CLAUDE.md`（全局约定） | `~/.codex/AGENTS.md`（全局约定，Codex 自动读取） |
 | `~/.claude/rules/*.md`（8 个规则文件） | `~/.codex/rules/`，AGENTS.md 按需引用 |
-| `~/.claude/agents/*.md`（4 个子代理） | `~/.codex/skills/{code-reviewer,code-writer,ui-designer,ux-reviewer}/`，各含 `SKILL.md` + `agents/openai.yaml` |
+| `~/.claude/agents/*.md`（4 个子代理） | `~/.codex/agents/{code-reviewer,code-writer,ui-designer,ux-reviewer}.toml`（官方 TOML 格式；同名 SKILL.md 保留在 skills/ 下作技能） |
 | `~/.claude/personal-ai-os/`（个人 AI 操作系统） | `~/.codex/personal-ai-os/` |
 | `~/.claude/design-md/`（74 个品牌设计体系） | `~/.codex/design-md/` |
 | `~/.claude/skills/*` | `~/.codex/skills/*` |
@@ -26,7 +26,7 @@
 - 原作者的机器路径 `/Users/zrf/...` → `~/workspace/...`（个人业务路径，需按本机实际自定义，已在文档中标注）
 - 作者盘符示例 `E:\00 PycharmProjects\...` → `<工作区路径>\...`
 - web-access 的 `${CLAUDE_SKILL_DIR}` → `~/.codex/skills/web-access`，并补充 PowerShell 写法说明
-- 子代理 frontmatter 中的 `tools:`、`model:` 等 Claude 专用字段已移除
+- 子代理转为 Codex 官方 TOML 格式（name / description / developer_instructions），Claude 专用字段（tools、model 等）已移除
 
 ### 缺失脚本补齐（原仓库漏掉了所有 scripts/）
 
@@ -45,7 +45,7 @@
 
 agent-browser、aihot、api-and-interface-design、beautiful-html-templates、bi-dashboard、business-analyst、canvas-design、code-quality-review、code-reviewer、code-writer、context-engineering、darwin-skill、debugging-and-error-recovery、documentation-and-adrs、docx、domain-modeling、doubt-driven-development、feature-breakdown、feishu-doc-beautify、frontend-design、frontend-slides、grilling、grill-with-docs、hv-analysis、impeccable、live-lesson-deck、long-form-writing、mcp-builder、neat-freak、ooux-product-design、pdf、pptx、prd、product-breakdown、product-strategy、prototype、remotion、research、security-and-hardening、shadcn、source-driven-development、storage-analyzer、taste-skill、tdd、ui-copy-check、ui-designer、ui-ux-pro-max、ux-bug-check、ux-reviewer、wayfinder、web-access、webapp-testing、web-artifacts-builder、xlsx
 
-其中 4 个是原 agents 转换的子代理技能（code-reviewer / code-writer / ui-designer / ux-reviewer），其余是通用技能。
+其中 4 个对应原 agents 角色（code-reviewer / code-writer / ui-designer / ux-reviewer）：官方子代理在 agents/ 目录（TOML 格式），同名 SKILL.md 保留在 skills/ 下作技能；其余是通用技能。
 
 ## 未安装及原因
 
@@ -69,7 +69,7 @@ agent-browser、aihot、api-and-interface-design、beautiful-html-templates、bi
 ## 使用须知
 
 1. **全局约定自动生效**：新开 Codex 会话会读取 `~/.codex/AGENTS.md`，其中指向 rules/ 与 personal-ai-os/。
-2. **子代理调用**：在会话中用 `$code-reviewer`、`$code-writer`、`$ui-designer`、`$ux-reviewer` 调用。
+2. **子代理调用**：Codex 从 `~/.codex/agents/` 加载官方子代理（code-reviewer / code-writer / ui-designer / ux-reviewer）。当前 multi-agent 消息 bug 未修复前，官方规则约定不派子代理，重活主线直做（见下方已知问题）。
 3. **个人 AI 操作系统**：personal-ai-os 的大部分流程依赖原作者的私有环境（飞书凭证、知识库、课程业务）。未配置部分会自然跳过，启用前需先向用户确认。
 4. **运行依赖**（用到时按技能内说明安装）：
    - Python：pdf/pptx/xlsx/docx/webapp-testing/ui-ux-pro-max/storage-analyzer/hv-analysis 需要 python 库（python-pptx、openpyxl、weasyprint、playwright 等）

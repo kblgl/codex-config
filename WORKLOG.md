@@ -35,3 +35,13 @@
 - 目录更名为 `codex-config`（与 GitHub 仓库同名），随后移入 `_archive/`
 - 归档前最后一次同步：README 目录名引用更新、本记录追加，已推送到 GitHub
 - 配置本体继续在 `~/.codex` 运行；后续如需更新仓库，可从 `_archive/codex-config` 直接推送，或从 GitHub 克隆后同步 `~/.codex` 的新改动
+
+## 2026-08-02 02:31
+
+子代理结构按官方要求修正：
+
+- 核实官方文档与源码：Codex 自定义子代理位置是 `~/.codex/agents/*.toml`，不是 skills/ 下的 SKILL.md
+- 新增本机 `~/.codex/agents/` 四个 TOML（code-reviewer/code-writer/ui-designer/ux-reviewer），developer_instructions 取自对应 SKILL.md 正文；同名 SKILL.md 保留在 skills/ 继续作技能
+- 仓库新增 agents/ 目录，同步四份 TOML
+- 修正 AGENTS.md「子代理以技能形式提供」表述；README 结构转换表与使用须知；dispatch.md 失效路径 code-writer.md → code-writer.toml（维护协议例外一）
+- 本机与仓库 6 个文件 SHA256 全部一致

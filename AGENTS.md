@@ -56,7 +56,7 @@
 
 本体攥住主线，重活和可并行的独立工作包委派给子代理；产品策略和需求拆解类的强交互工作由本体加载对应 skill（product-strategy / product-breakdown）主线执行。**编码类**工作哪些活怎么分、完整流程顺序、何时跳过，唯一权威是 [rules/sub_agent_dispatch.md](~/.codex/rules/sub_agent_dispatch.md)；**内容生产类**（课件、答疑归档、文稿、知识库、数据分析）的调度权威是 [personal-ai-os/dispatch.md](~/.codex/personal-ai-os/dispatch.md)。本文件不另设标准。
 
-子代理在 Codex 中以技能形式提供：`$code-reviewer`、`$code-writer`、`$ui-designer`、`$ux-reviewer`（位于 `~/.codex/skills/` 下，各自带 agents/openai.yaml）。
+子代理以官方 TOML 格式提供：code-reviewer、code-writer、ui-designer、ux-reviewer（位于 `~/.codex/agents/` 下，每个角色一个 `.toml` 文件）。同名目录仍保留在 `~/.codex/skills/` 下作为技能供主线按需加载，两者不是一回事。
 
 ## 规则清单
 

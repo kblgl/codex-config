@@ -71,7 +71,7 @@
 
 ### 动手阶段的审美来源（按页面类型路由）
 
-权威在`~/.codex/rules/sub_agent_dispatch.md`「不派时怎么处理」和`~/.codex/agents/code-writer.md`第7条，本文件不复述。一句话版：营销类页面（落地页/官网/招募页/作品集）用taste-skill，中文页面配`~/.codex/rules/cn_typography.md`字体补丁；产品UI/看板/多步应用界面用frontend-design（taste-skill自我声明不覆盖这类）。
+权威在`~/.codex/rules/sub_agent_dispatch.md`「不派时怎么处理」和`~/.codex/agents/code-writer.toml`第7条，本文件不复述。一句话版：营销类页面（落地页/官网/招募页/作品集）用taste-skill，中文页面配`~/.codex/rules/cn_typography.md`字体补丁；产品UI/看板/多步应用界面用frontend-design（taste-skill自我声明不覆盖这类）。
 
 ### 新营销页四步流水线
 
