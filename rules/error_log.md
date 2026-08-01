@@ -116,3 +116,45 @@ SKILL.md是行为指引和原则文档，描述做什么和为什么，不引用
 **实证**：2026-08-02 check-subagent-fix.ps1 以无 BOM UTF-8 保存后，powershell.exe 报「字符串缺少终止符」「Try 语句缺少 Catch」，补 BOM 后正常。
 
 **正确做法**：脚本保存为 UTF-8 with BOM（前三个字节 EF BB BF）；纯 ASCII 脚本不受影响，但统一带 BOM 更稳。
+
+### 10. Codex 自定义子代理必须用官方 TOML 格式，禁止做成技能放 skills/
+
+**触发条件**：适配 Claude 配置或往配置仓库放置子代理时
+
+**错误做法**：把 4 个子代理（code-reviewer / code-writer / ui-designer / ux-reviewer）做成 SKILL.md + agents/openai.yaml 技能格式，放在 `~/.codex/skills/` 下，并在 AGENTS.md 写「子代理以技能形式提供」
+
+**根因**：从 Claude 配置适配时机械转换，没核对 Codex 官方文档。Claude 的 `~/.claude/agents/*.md` 和 Codex 的 `~/.codex/agents/*.toml` 是两套机制，技能（SKILL.md）和子代理是两个不同的东西，技能只提供操作手册，不构成子代理角色
+
+**实证**：2026-08-02 配置推送后用户质疑「你确定codex官方的子代理是放在skills下的」，经 openai-docs 官方来源确认，Codex 自定义子代理必须在 `~/.codex/agents/*.toml`，字段为 name / description / developer_instructions；后续才补建 agents/ 目录并删除 skills/ 下同名目录
+
+**正确做法**：
+- 子代理放 `~/.codex/agents/`（个人级）或 `.codex/agents/`（项目级），每个角色一个 TOML，必须含 name、description、developer_instructions
+- skills/ 只放技能，不放子代理角色
+- 涉及 Codex 自身行为、格式、目录的问题，先加载 openai-docs skill 按官方来源确认，再下结论
+
+### 11. 配置结构调整必须一次闭环：旧载体同步删除、清理不留用户
+
+**触发条件**：把配置或文件从 A 形式迁移或调整为 B 形式时（如技能转子代理、目录搬家、格式换新）
+
+**错误做法**：只新增 B 形式并改文档，不删 A 形式，还写「两者并存」；用户追问后才补删；删除被工具拦截时改移动暂存，然后把清理动作丢给用户
+
+**根因**：把「新增」当成「调整完成」，没把迁移理解为增删改查全套；收尾动作没闭环，半成品交给用户
+
+**实证**：2026-08-02 子代理转 TOML 后 skills/ 下四个同名技能目录没删，用户问「你改了之后不应该把skill下的对应文件删了吗」；暂存目录 `_removed-skills-20260802` 留给用户自己清理，用户不满「烧了我的token还不把事情做好」
+
+**正确做法**：
+- 迁移一次做完：新载体创建、旧载体删除、引用检查、文档同步、日志留痕、推送
+- 删除前检查活跃文件有无引用旧路径，避免留死链
+- 工具限制导致无法直接删除时，当场用等效手段完成清理，不把残留目录留给用户
+
+### 12. 确认 Codex 官方行为先加载 openai-docs skill
+
+**触发条件**：需要确认 Codex 自身的行为、配置、格式、目录结构或功能边界时
+
+**错误做法**：绕开 openai-docs skill，直接翻源码、靠搜索结果或凭记忆下结论
+
+**根因**：openai-docs 是系统提供的官方文档技能，有既定的来源流程（Codex manual → Docs MCP → 官方域名兜底），绕路既慢又容易给错结论
+
+**实证**：2026-08-02 确认子代理位置时先查源码和搜索，用户指出「openai-docs不是有这个skill吗，你通过这个确认不就行了吗」，改走该技能后拿到官方文档原文
+
+**正确做法**：涉及 Codex 自身产品行为的问题，第一步加载 openai-docs skill，按其 SKILL.md 的来源路由执行；技能拉不到官方页面时再按它的兜底顺序走，不自行换路

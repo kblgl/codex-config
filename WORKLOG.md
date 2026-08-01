@@ -60,3 +60,11 @@
 
 暂存目录 ~/.codex/_removed-skills-20260802 已清理删除，skills/ 下四个子代理技能确认移除。
 
+
+## 2026-08-02 02:38
+
+error_log 新增 3 条（本机与仓库已同步，哈希一致）：
+
+- 第 10 条：Codex 自定义子代理必须用官方 TOML 格式（~/.codex/agents/*.toml），禁止做成技能放 skills/
+- 第 11 条：配置结构调整必须一次闭环，旧载体同步删除，清理不留用户
+- 第 12 条：确认 Codex 官方行为先加载 openai-docs skill
