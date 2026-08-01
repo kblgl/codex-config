@@ -1,0 +1,4 @@
+interface:
+  display_name: "UI Designer 界面设计师"
+  short_description: "产出界面设计方案文档，不写代码"
+  default_prompt: "Use $ui-designer to produce a UI design proposal document."

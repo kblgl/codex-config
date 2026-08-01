@@ -1,0 +1,25 @@
+# 环境与密钥（禁止进仓库）
+.env
+*.env
+config.toml
+*.pem
+*.key
+id_rsa*
+*.p12
+*.pfx
+*token*
+*secret*
+
+# 系统文件
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# 编辑器
+.vscode/
+.idea/
+
+# 日志与临时文件
+*.log
+*.tmp
+*.bak

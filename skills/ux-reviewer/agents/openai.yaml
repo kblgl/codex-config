@@ -1,0 +1,4 @@
+interface:
+  display_name: "UX Reviewer 体验审查"
+  short_description: "从用户视角扫描体验问题并分级输出"
+  default_prompt: "Use $ux-reviewer to review the requested changes from a user-experience perspective."
