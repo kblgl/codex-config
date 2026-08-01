@@ -1,4 +1,0 @@
-interface:
-  display_name: "Code Writer 实现工程师"
-  short_description: "按规格实现编码任务，返回改动清单"
-  default_prompt: "Use $code-writer to implement the requested coding task."

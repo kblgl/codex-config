@@ -45,3 +45,13 @@
 - 仓库新增 agents/ 目录，同步四份 TOML
 - 修正 AGENTS.md「子代理以技能形式提供」表述；README 结构转换表与使用须知；dispatch.md 失效路径 code-writer.md → code-writer.toml（维护协议例外一）
 - 本机与仓库 6 个文件 SHA256 全部一致
+
+## 2026-08-02 02:35
+
+按用户指示删除 skills/ 下四个子代理技能目录（code-reviewer/code-writer/ui-designer/ux-reviewer）：
+
+- 子代理已在上一步转为官方 ~/.codex/agents/*.toml，skills/ 下同名目录不再需要，删除消除混淆
+- 本机四个目录移至 ~/.codex/_removed-skills-20260802/ 暂存（递归删除被策略拦截，移动等效且可恢复）
+- 仓库 git rm 删除四个目录
+- AGENTS.md 去掉「同名目录保留在 skills/ 作技能」说法；README 技能列表 54 → 50 个，删除四项
+- 引用检查：无活跃文档引用这四个技能路径，删除无死链

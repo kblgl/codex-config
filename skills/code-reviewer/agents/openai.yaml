@@ -1,4 +1,0 @@
-interface:
-  display_name: "Code Reviewer 代码审查"
-  short_description: "审查代码改动并输出结构化报告"
-  default_prompt: "Use $code-reviewer to review the requested code changes and return a structured markdown report."

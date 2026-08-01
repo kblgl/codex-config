@@ -13,7 +13,7 @@
 |---|---|
 | `~/.claude/CLAUDE.md`（全局约定） | `~/.codex/AGENTS.md`（全局约定，Codex 自动读取） |
 | `~/.claude/rules/*.md`（8 个规则文件） | `~/.codex/rules/`，AGENTS.md 按需引用 |
-| `~/.claude/agents/*.md`（4 个子代理） | `~/.codex/agents/{code-reviewer,code-writer,ui-designer,ux-reviewer}.toml`（官方 TOML 格式；同名 SKILL.md 保留在 skills/ 下作技能） |
+| `~/.claude/agents/*.md`（4 个子代理） | `~/.codex/agents/{code-reviewer,code-writer,ui-designer,ux-reviewer}.toml`（官方 TOML 格式） |
 | `~/.claude/personal-ai-os/`（个人 AI 操作系统） | `~/.codex/personal-ai-os/` |
 | `~/.claude/design-md/`（74 个品牌设计体系） | `~/.codex/design-md/` |
 | `~/.claude/skills/*` | `~/.codex/skills/*` |
@@ -41,11 +41,11 @@
 | frontend-slides | zarazhangrui/frontend-slides 上游 |
 | web-access | eze-is/web-access 上游 |
 
-## 已安装技能（54 个）
+## 已安装技能（50 个）
 
-agent-browser、aihot、api-and-interface-design、beautiful-html-templates、bi-dashboard、business-analyst、canvas-design、code-quality-review、code-reviewer、code-writer、context-engineering、darwin-skill、debugging-and-error-recovery、documentation-and-adrs、docx、domain-modeling、doubt-driven-development、feature-breakdown、feishu-doc-beautify、frontend-design、frontend-slides、grilling、grill-with-docs、hv-analysis、impeccable、live-lesson-deck、long-form-writing、mcp-builder、neat-freak、ooux-product-design、pdf、pptx、prd、product-breakdown、product-strategy、prototype、remotion、research、security-and-hardening、shadcn、source-driven-development、storage-analyzer、taste-skill、tdd、ui-copy-check、ui-designer、ui-ux-pro-max、ux-bug-check、ux-reviewer、wayfinder、web-access、webapp-testing、web-artifacts-builder、xlsx
+agent-browser、aihot、api-and-interface-design、beautiful-html-templates、bi-dashboard、business-analyst、canvas-design、code-quality-review、context-engineering、darwin-skill、debugging-and-error-recovery、documentation-and-adrs、docx、domain-modeling、doubt-driven-development、feature-breakdown、feishu-doc-beautify、frontend-design、frontend-slides、grilling、grill-with-docs、hv-analysis、impeccable、live-lesson-deck、long-form-writing、mcp-builder、neat-freak、ooux-product-design、pdf、pptx、prd、product-breakdown、product-strategy、prototype、remotion、research、security-and-hardening、shadcn、source-driven-development、storage-analyzer、taste-skill、tdd、ui-copy-check、ui-ux-pro-max、ux-bug-check、wayfinder、web-access、webapp-testing、web-artifacts-builder、xlsx
 
-其中 4 个对应原 agents 角色（code-reviewer / code-writer / ui-designer / ux-reviewer）：官方子代理在 agents/ 目录（TOML 格式），同名 SKILL.md 保留在 skills/ 下作技能；其余是通用技能。
+原 4 个 agents 角色已转为官方子代理，位于 agents/ 目录（TOML 格式），不再以技能形式安装。
 
 ## 未安装及原因
 
