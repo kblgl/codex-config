@@ -18,3 +18,12 @@
 - `codex-adapted` 更名为规范子项目 `20260801-codex-config-adapt`，`README-适配说明.md` 改名 `README.md`
 - 新建 `_template/README.md` 模板、本 WORKLOG.md
 - 清理下载缓存（约 275MB）到 `_shared/temp-downloads` 下的空目录，等待手动删除
+
+## 2026-08-02 02:10
+
+配置推送到 GitHub 仓库 kblgl/codex-config：
+
+- gh CLI 设备码登录完成（kblgl，HTTPS 协议），本地仓库关联远端 `https://github.com/kblgl/codex-config.git`
+- 远端原有旧版文件（agents/、docs/、workspace-template/、旧 README 等）按用户要求全部替换，强制推送 main 分支覆盖
+- 推送内容：AGENTS.md、README.md、WORKLOG.md、rules/、skills/（54 个）、personal-ai-os/、design-md/、scripts/，共 1220 个文件，另含 .gitignore 与 .gitattributes（LF 统一）
+- 推送前完成敏感扫描，无密钥凭证；远端验证通过，根目录结构与本地一致
