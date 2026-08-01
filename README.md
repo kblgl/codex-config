@@ -3,7 +3,7 @@
 ## 来源
 
 - 原始仓库：[Zuojuzhang/my_claude_code_agent_config](https://github.com/Zuojuzhang/my_claude_code_agent_config)（master 分支，2026-08-01 拉取）
-- 本目录 `20260801-codex-config-adapt/`（原 `codex-adapted`）是适配后的可安装包；已直接安装到本机 `~/.codex/`
+- 本目录 `codex-config/`（原 `20260801-codex-config-adapt`，再往前为 `codex-adapted`）是适配后的可安装包；已直接安装到本机 `~/.codex/`
 
 ## 适配方式
 

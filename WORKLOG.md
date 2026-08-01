@@ -27,3 +27,11 @@
 - 远端原有旧版文件（agents/、docs/、workspace-template/、旧 README 等）按用户要求全部替换，强制推送 main 分支覆盖
 - 推送内容：AGENTS.md、README.md、WORKLOG.md、rules/、skills/（54 个）、personal-ai-os/、design-md/、scripts/，共 1220 个文件，另含 .gitignore 与 .gitattributes（LF 统一）
 - 推送前完成敏感扫描，无密钥凭证；远端验证通过，根目录结构与本地一致
+
+## 2026-08-02 02:19
+
+项目完成归档：
+
+- 目录更名为 `codex-config`（与 GitHub 仓库同名），随后移入 `_archive/`
+- 归档前最后一次同步：README 目录名引用更新、本记录追加，已推送到 GitHub
+- 配置本体继续在 `~/.codex` 运行；后续如需更新仓库，可从 `_archive/codex-config` 直接推送，或从 GitHub 克隆后同步 `~/.codex` 的新改动
