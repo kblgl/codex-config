@@ -25,7 +25,7 @@
 先查看脚本，再显式指定平台。脚本不使用 sudo，只写 `SKILL.md` 与 `README.md`。
 
 ```bash
-# Claude Code
+# Codex
 bash <(curl -fsSL https://aihot.virxact.com/aihot-skill/install.sh) --target claude
 
 # Codex

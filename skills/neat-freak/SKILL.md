@@ -4,7 +4,7 @@ description: >
   End-of-session knowledge cleanup with OCD-level rigor — reconciles project docs
   (AGENTS.md, README.md, docs/) and agent memory against the code, and audits whether
   the workspace's own rules are being followed (naming conventions, required files,
-  AGENTS.md/AGENTS.md symlink integrity, dead references inside rule files).
+  AGENTS.md symlink integrity, dead references inside rule files).
   会话结束后对项目文档和记忆进行洁癖级审查与同步，并审计规范执行情况。MUST trigger when the user says:
   "sync up", "tidy up docs", "update memory", "clean up docs", "/sync", "/neat", "同步一下",
   "整理文档", "整理一下", "更新记忆", "梳理一下", "收尾", "这个阶段做完了",
@@ -12,13 +12,13 @@ description: >
   or any phrase suggesting a dev milestone where knowledge needs
   reconciliation. Also trigger when the user reports stale docs, conflicting memories,
   rule violations, or wants a clean handoff to teammates or other agents. Bare "整理" / "tidy" with
-  prior dev context counts — do not under-trigger. Cross-platform: works on Claude Code,
+  prior dev context counts — do not under-trigger. Cross-platform: works on Codex,
   OpenAI Codex, OpenCode, and OpenClaw.
 ---
 
 # 洁癖 — Knowledge Base Neat-Freak
 
-> **Cross-platform Agent Skill** — Claude Code · OpenAI Codex · OpenCode · OpenClaw 通用。
+> **Cross-platform Agent Skill** — Codex · OpenAI Codex · OpenCode · OpenClaw 通用。
 > 跨平台 SKILL.md，遵循开放 Agent Skill 规范。
 
 你是一个**知识库编辑**，不是记录员。记录员只会往后追加，编辑会审查全局、合并重复、修正过期、删除废弃。编辑还有第二重身份：**规范的执行者**——工作空间定了的规矩（命名、必备文件、同源约束），你要核对实践有没有跟上。你的工作是让整个项目的知识体系始终保持**干净、准确、对新人友好**的状态——像有洁癖一样。
@@ -41,7 +41,7 @@ description: >
 
 这三层**受众不同，职责不重叠**。AGENTS.md 里写"新增了 device flow 五个路由" ≠ docs/integration-guide.md 里"下游怎么接这套 flow" —— 前者是提醒自己，后者是教别人。**两份都要写。**
 
-> **Agent 记忆系统的具体位置因平台而异**（Claude Code 在 `~/.codex/projects/<...>/memory/`，Codex 在 `~/.codex/AGENTS.md`【手改、权威】+ `~/.codex/memories/`【机器生成、勿手改】，OpenCode 用 `.opencode/`，OpenClaw 用 `~/.openclaw/`）。完整路径速查见 [references/agent-paths.md](references/agent-paths.md)。如果当前 agent 没有独立的记忆系统，直接跳过这一层，把功夫全花在 docs 和项目根 markdown 上。
+> **Agent 记忆系统的具体位置因平台而异**（Codex 在 `~/.claude/projects/<...>/memory/`，Codex 在 `~/.codex/AGENTS.md`【手改、权威】+ `~/.codex/memories/`【机器生成、勿手改】，OpenCode 用 `.opencode/`，OpenClaw 用 `~/.openclaw/`）。完整路径速查见 [references/agent-paths.md](references/agent-paths.md)。如果当前 agent 没有独立的记忆系统，直接跳过这一层，把功夫全花在 docs 和项目根 markdown 上。
 
 ### 记忆只增不改、docs 就地编辑——要靠「毕业」机制把知识往上泵（膨胀头号根因）
 
@@ -61,7 +61,7 @@ description: >
 >
 > **毕业的去向只有两个：docs/ 或 AGENTS.md。本 skill 永远不把记忆毕业成 skill，也永远不新建任何 skill——这是用户的明确约定，任何情况下不要提议突破。**
 
-### AGENTS.md / AGENTS.md 是规则手册，不是变更日志（重要）
+### AGENTS.md 是规则手册，不是变更日志（重要）
 
 最常见的 skill 翻车模式：每次开发完都在 AGENTS.md 顶部加一段 blockquote 历史叙事——"2026-05-08 X 功能上线，详见 docs/Y.md"。一次很爽，半年后顶部就是 200 行 blockquote 把真正的规则推到看不见。**这种叙事不属于 AGENTS.md**，它的归宿是 git log / `/changelog` 页 / `docs/CHANGES.md`。
 
@@ -94,7 +94,7 @@ description: >
 | 文件 | 上限 | 超过怎么办 |
 |---|---|---|
 | `AGENTS.md` / `AGENTS.md` | ~300 行 / ~15KB（软） | 先精简：扫顶部 blockquote / 历史叙事段 → 删 / 迁 docs；项目概览只留 1-3 行 + 速查表，不做"提醒下次会话"用。（AGENTS.md 每会话全量常驻加载，不会被截断，但它占用的是最贵的注意力预算——只配放普遍适用的内容，这也是 Anthropic 官方判据） |
-| 记忆索引 `MEMORY.md` | **≤200 行 且 ≤25KB（硬）** | Claude Code 只加载 `MEMORY.md` 的前 200 行或前 25KB（先到先算），**超出部分在会话开始时静默不加载——等于没记**。务必压在 ~150 行 / ~18KB 留缓冲。压法不是硬删，是下面的「毕业」机制：详细机制提升进 docs、索引只留一行指针 |
+| 记忆索引 `MEMORY.md` | **≤200 行 且 ≤25KB（硬）** | Codex 只加载 `MEMORY.md` 的前 200 行或前 25KB（先到先算），**超出部分在会话开始时静默不加载——等于没记**。务必压在 ~150 行 / ~18KB 留缓冲。压法不是硬删，是下面的「毕业」机制：详细机制提升进 docs、索引只留一行指针 |
 | 单条 memory 文件 | ~100 行（软） | 通常在塞多件事 / 写成事故复盘 → 拆 / 删；**若是稳定机制说明，提升进 docs 再把记忆缩成 reference 指针** |
 | `docs/<single>.md` | ~1500 行（软） | 切分成多文件，加目录索引 |
 
@@ -110,16 +110,16 @@ description: >
 
 **先做 ls，再做判断。**
 
-0. **平台探测**：`ls -d ~/.codex ~/.codex ~/.config/opencode ~/.openclaw 2>/dev/null`——只盘点真实存在的平台，不存在的平台整层跳过（别按想象中的路径空跑）。
+0. **平台探测**：`ls -d ~/.claude ~/.codex ~/.config/opencode ~/.openclaw 2>/dev/null`——只盘点真实存在的平台，不存在的平台整层跳过（别按想象中的路径空跑）。
 1. 列出 agent 的记忆文件（如有）：
-   - Claude Code：`ls ~/.codex/projects/<...>/memory/` 并读 `MEMORY.md` 及所有被引用的 `.md`
+   - Codex：`ls ~/.claude/projects/<...>/memory/` 并读 `MEMORY.md` 及所有被引用的 `.md`
    - Codex / OpenCode / 其他：找该 agent 的等价位置（见 references/agent-paths.md）
 2. 对本次对话涉及的**每一个项目**：
    - `ls <project-root>/` → 确认根目录结构
    - `ls <project-root>/docs/ 2>/dev/null` → **枚举所有 docs**（缺失也要确认）
    - `find <project-root> -maxdepth 2 -name "*.md" -not -path "*/node_modules/*" -not -path "*/.git/*"` → 兜底抓散落的 .md
    - 读 `README.md`、`AGENTS.md` / `AGENTS.md`、每一个 `docs/*.md`
-3. **向上收集规则文件**：从项目根往上走到工作空间根（如 `~/code`），把沿途每一级的 `AGENTS.md` / `AGENTS.md` 都读了，再读全局配置（`~/.codex/AGENTS.md`、`~/.codex/AGENTS.md`，若存在）。这些是第二步规范审计的依据。
+3. **向上收集规则文件**：从项目根往上走到工作空间根（如 `~/code`），把沿途每一级的 `AGENTS.md` / `AGENTS.md` 都读了，再读全局配置（`~/.claude/AGENTS.md`、`~/.codex/AGENTS.md`，若存在）。这些是第二步规范审计的依据。
 4. 回顾本次对话全部内容
 
 **输出一张文件清单**（内部用，不用给用户看），对每个文件标：「评估过 / 要改 / 不用改」。**漏一个不行**——这是这个 skill 最容易翻车的地方。
@@ -141,7 +141,7 @@ description: >
 | 类型 | 例子 | 处置 |
 |---|---|---|
 | 安全、可逆、纯补齐 | 补 AGENTS.md 软链；给缺 AGENTS.md 的项目按模板建脚手架；`.gitignore` 补 `.env` 条目 | **直接修**，摘要里报告 |
-| 破坏性、有外部影响 | 目录重命名（会破坏 git remote、部署脚本、Syncthing 路径、他人引用）；删除文件；合并两份内容不一致的 AGENTS.md/AGENTS.md（要先人工确认哪边是权威） | **不动手**，列入摘要「待你拍板」，附影响说明和建议 |
+| 破坏性、有外部影响 | 目录重命名（会破坏 git remote、部署脚本、Syncthing 路径、他人引用）；删除文件；合并两份内容不一致的 AGENTS.md（要先人工确认哪边是权威） | **不动手**，列入摘要「待你拍板」，附影响说明和建议 |
 
 **同类违规反复出现 → 建议 hook 化**：同一条规则在多个项目或多次同步中反复被违反，说明散文规则挡不住它——散文规则是建议性的，hook 是确定性的。在「待你拍板」里建议用户把这条规则转成 hook（事中强制拦截），从「每次事后修」升级为「一次性根治」。本 skill 只建议，不代配 hook。
 
@@ -151,7 +151,7 @@ description: >
 - **矛盾**：上下两级规则打架、规则与 skill 的指引打架、同一文件内自相矛盾 → 能判断哪边是现行事实的直接改，判断不了的列出来
 - **漂移**：规则说 X，但所有项目实际都在做 Y 且运转良好 → 这可能是规则过时而非实践错误，列「待你拍板」建议改规则
 
-**对全局配置（`~/.codex/AGENTS.md` 等）的克制要分清方向**：克制的是**新增内容**——日常项目细节绝不写进全局；但**清理是减法**，死引用、过期事实、矛盾照样要修或上报，别拿「克制」当不审计的借口。
+**对全局配置（`~/.claude/AGENTS.md` 等）的克制要分清方向**：克制的是**新增内容**——日常项目细节绝不写进全局；但**清理是减法**，死引用、过期事实、矛盾照样要修或上报，别拿「克制」当不审计的借口。
 
 ### 第三步：识别变更——用"变更影响矩阵"思考
 
@@ -175,11 +175,11 @@ description: >
 
 你必须**真的用 Edit 修改现有文件、用 Write 创建新文件、用删除命令清理废弃文件**。"我会怎么改"的描述不算完成。
 
-**顺序建议**：先改 docs/（改错影响外部）→ 再改 AGENTS.md/AGENTS.md → 最后理记忆。先动外部优先级最高的，即使中途被打断，读者看到的也是对齐的最新状态。
+**顺序建议**：先改 docs/（改错影响外部）→ 再改 AGENTS.md → 最后理记忆。先动外部优先级最高的，即使中途被打断，读者看到的也是对齐的最新状态。
 
 **编辑原则**：
 
-- **减优于加**（最重要）：每次同步动作结束后，AGENTS.md / AGENTS.md 净涨幅 > 30 行就是红灯——很可能在写历史叙事而不是补规则。回头审：这条加的是"下次 AI 写代码时必须看到"的规则，还是"上次会话告诉下次会话发生了什么"的便条？后者就是病。能删的先删，不能删的迁去 docs，最后剩下的才是规则。
+- **减优于加**（最重要）：每次同步动作结束后，AGENTS.md 净涨幅 > 30 行就是红灯——很可能在写历史叙事而不是补规则。回头审：这条加的是"下次 AI 写代码时必须看到"的规则，还是"上次会话告诉下次会话发生了什么"的便条？后者就是病。能删的先删，不能删的迁去 docs，最后剩下的才是规则。
 - **合并优于追加**：新信息是对旧信息的更新，改旧条目；新加条目前先 grep 同关键字，看现有条目能不能并
 - **删除优于保留**：完成的临时计划、推翻的决策、已被新版本取代的项目记忆、单次事故的流水账复盘——删
 - **毕业优于内部挪腾**（针对 memory）：一条记忆稳定、复用、或本属「系统怎么工作」时，别在 memory 里搬来搬去——并进 docs / AGENTS.md，原文件缩成一行指针或删。这是把 memory 压回「薄」的唯一治本手段（见上「毕业」机制）
@@ -188,7 +188,7 @@ description: >
 - **面向读者**：docs/ 的读者是"第一次接触这个项目的外部人"，写的时候想象对方只有 5 分钟能看完
 - **受众不混**：AGENTS.md 里不抄 docs/ 的全文，docs/ 里不写"我记得上次……"——这是记忆的事
 - **指针不重复**：同一条事实如果 docs/ 里已详写，AGENTS.md 只在「深入文档」指针表里出现一次，不在概览段再叙事一次
-- **同源不分叉**：AGENTS.md 与 AGENTS.md 必须同源（软链，AGENTS.md 为真身）。永远只编辑 AGENTS.md；发现两份独立文件，按第二步的处置分级走
+- **同源不分叉**：AGENTS.md 与 AGENTS.override.md 必须同源（软链，AGENTS.md 为真身）。永远只编辑 AGENTS.md；发现两份独立文件，按第二步的处置分级走
 
 **docs/ 编辑要点**——新增一个能力的文档变更通常要四处都补：
 1. **integration-guide** 或对应"外部视角"文档：加**怎么用**（curl / SDK 示例 / 错误码表）
@@ -203,7 +203,7 @@ API 速查表、环境变量表、术语表是高频查询的结构化信息，*
 这一步同时防止"漏改 docs" + "误把叙事塞进 AGENTS.md" + "规范审计走过场"。改完后逐条检查：
 
 **尺寸 / 反膨胀（先查这组，不达标的话回头先精简）**：
-- [ ] AGENTS.md / AGENTS.md 净涨幅 ≤ 30 行（超了就是塞了历史叙事，回去删 / 迁 docs）
+- [ ] AGENTS.md 净涨幅 ≤ 30 行（超了就是塞了历史叙事，回去删 / 迁 docs）
 - [ ] 没新增 "X 起 Y 上线，详见 docs/Z.md" 这种 blockquote 历史叙事条目
 - [ ] 没在 AGENTS.md 里抄 docs/ 已有的详细机制说明
 - [ ] 单条 memory 文件没超 ~100 行（超了拆 / 删 / 改成 reference）
@@ -213,7 +213,7 @@ API 速查表、环境变量表、术语表是高频查询的结构化信息，*
 **规范执行（第二步的产出核对）**：
 - [ ] 层级规则文件从项目根读到了工作空间根 + 全局
 - [ ] 可核验约定逐条核对过：每条违规要么已修（安全类），要么进了摘要「待你拍板」（破坏类）——没有第三种"看见了但没记录"
-- [ ] AGENTS.md 与 AGENTS.md 同源（软链完好，没有内容分叉的两份文件）
+- [ ] AGENTS.md 与 AGENTS.override.md 同源（软链完好，没有内容分叉的两份文件）
 - [ ] 规则文件里引用的路径 / 项目在现实中存在（死引用已清或已上报）
 
 **完整性 / 反漏改（再查这组）**：
@@ -223,7 +223,7 @@ API 速查表、环境变量表、术语表是高频查询的结构化信息，*
 - [ ] 记忆之间没有互相矛盾
 - [ ] **没有过期开放项冒充活计划**：带「待办/未决/暂缓」且日期早于今天的行，都已核实落地与否并处置（链 commit 删 / 降级为未决 / 删）
 - [ ] **退役类改动**：被删 symbol 在 docs/ + 记忆（含 Codex `~/.codex/`）里的非载荷引用已清，死 skill 目录已删
-- [ ] AGENTS.md / AGENTS.md 里提到的路径 / 命令 / 工具 / 环境变量在代码中真实存在
+- [ ] AGENTS.md 里提到的路径 / 命令 / 工具 / 环境变量在代码中真实存在
 - [ ] README 的安装 / 运行步骤跟代码一致
 - [ ] 新增 API 路由：**在 integration-guide 和 architecture 都出现了**
 - [ ] 新增环境变量：**在 runbook 和项目根 markdown 都出现了**
@@ -265,7 +265,7 @@ API 速查表、环境变量表、术语表是高频查询的结构化信息，*
 
 ## 特殊情况
 
-**项目还没有 README 或 AGENTS.md/AGENTS.md**：判断项目是不是到了"有可运行代码"的阶段。是 → 创建（工作空间规则有模板就按模板）。还在 vibe 阶段 → 跳过，但在摘要里提一句。
+**项目还没有 README 或 AGENTS.md**：判断项目是不是到了"有可运行代码"的阶段。是 → 创建（工作空间规则有模板就按模板）。还在 vibe 阶段 → 跳过，但在摘要里提一句。
 
 **对话没有产生新事实**：审查现有记忆和文档有没有过期 / 冲突 / 相对时间，并跑一遍第二步规范审计——审查本身就有价值。
 
@@ -279,4 +279,4 @@ API 速查表、环境变量表、术语表是高频查询的结构化信息，*
 
 - **[references/sync-matrix.md](references/sync-matrix.md)** — 完整的"变更类型 → 要改哪些文件"映射表
 - **[references/governance.md](references/governance.md)** — 规范执行审计的可核验约定类别与处置细则
-- **[references/agent-paths.md](references/agent-paths.md)** — Claude Code / Codex / OpenCode / OpenClaw 各自的记忆与配置路径速查
+- **[references/agent-paths.md](references/agent-paths.md)** — Codex / Codex / OpenCode / OpenClaw 各自的记忆与配置路径速查

@@ -6,19 +6,19 @@
 
 - 本体攥主线：意图、判断、上下文在主会话手里，执行者领的是工作包不是思考
 - 派工prompt必须自包含：绝对路径、执行步骤、产出路径、自检清单，骨架见templates.md
-- 执行者可能跑在Codex或kimi code里，没有Claude Code的skill机制，一律让它Read流程文档的绝对路径
+- 执行者可能跑在Codex或kimi code里，没有Codex的skill机制，一律让它Read流程文档的绝对路径
 - 同一消息里能并行的独立工作包一起派，不串行排队
 
-## harness分工（Claude Code / Codex / kimi code）
+## harness分工（Codex / Codex / kimi code）
 
-- **Claude Code**：主力。全部内容生产轨、判断类工作、重要编码（线上产品的核心改动）。整套制度、skill、memory、subagent调度都长在这里
+- **Codex**：主力。全部内容生产轨、判断类工作、重要编码（线上产品的核心改动）。整套制度、skill、memory、subagent调度都长在这里
 - **Codex**：编码副驾。两个用法：①跨模型审查，上线前的改动让Codex独立review Claude写的代码，同一模型审自己的代码有共同盲区，跨模型才是真独立；②并行工作包，Claude主线忙时把边界清楚的编码任务丢过去
 - **kimi code**：机械层执行器。跑templates.md的T4/T5、数据抓取清洗、飞书批量读写、格式转换。会话第一句给SYSTEM.md路径，或直接贴自包含模板
 - 纪律：按任务分，不按半个任务分（中途换harness上下文带不过去，交接成本比省的quota贵）；判断类活不喂机械层，改错的时间比token贵
 
 ## 编码轨
 
-权威文件：`~/.codex/rules/sub_agent_dispatch.md`，全文有效，本文件不复述。
+权威文件：`~/.claude/rules/sub_agent_dispatch.md`，全文有效，本文件不复述。
 
 何时派code-writer、reviewer触发条件、reviewer循环2轮上限、测试归属、mattpocock工程流路由（grill-with-docs/wayfinder/tdd/research）、行号标注要求，全部以那份文件为准。
 
@@ -28,7 +28,7 @@
 
 ### 备课/课件生产
 
-流程权威：`~/.codex/skills/live-lesson-deck/SKILL.md`
+流程权威：`~/.claude/skills/live-lesson-deck/SKILL.md`
 
 分工：
 
@@ -40,26 +40,22 @@
 
 ### 直播答疑归档
 
-流程权威：`~/.codex/skills/live-qa-archive/SKILL.md`，九步全流程。
-
-> Codex 适配注：live-qa-archive 未随本机安装（依赖原作者飞书凭证与答疑业务），启用前先与用户确认。
+流程权威：`~/.claude/skills/live-qa-archive/SKILL.md`，九步全流程。
 
 - 整条链可交日常层甚至机械层，唯一人工步骤是第7步精炼要点（SKILL里已标注），执行者到第7步必须停下交回
 - 派工用templates.md的T2，给两样：当期日期（YYYYMMDD）、归档项目目录路径
 
 ### B站视频文稿
 
-- 流程权威：`~/.codex/skills/linyi-lyi-scriptwriter/SKILL.md`（2026-07-13定案：采用林亦LYi风格蒸馏skill，不再自建bilibili-script。skill源项目与206份语料在`~/workspace/20260711-linyi-lyi-distill/`，更新语料重跑其scripts重蒸馏）
-
-> Codex 适配注：linyi-lyi-scriptwriter 未随本机安装（依赖原作者私有语料），启用前先与用户确认。
+- 流程权威：`~/.claude/skills/linyi-lyi-scriptwriter/SKILL.md`（2026-07-13定案：采用林亦LYi风格蒸馏skill，不再自建bilibili-script。skill源项目与206份语料在`/Users/zrf/workspace/20260711-linyi-lyi-distill/`，更新语料重跑其scripts重蒸馏）
 - 选题和核心观点人定（判断节点2），AI可列候选带理由；三种模式按skill选：成稿（给选题走全流水线）、改稿（现有初稿改出林亦味）、骨架（只搭结构人来填肉）
 - 初稿可按T3外派日常层；终稿验收以skill自检8条为主、checklist.md B2组为辅，两者冲突时（林亦体的戏剧化修辞对上no_ai_style个别条款）以skill为准，冲突点交付时标注
 - 素材红线（skill明文）：用户没给真实素材，实验数据和个人轶事必须标注「示意，需替换为实测」，对外发布前人工替换，禁止编造当真实交付
-- 产出目录：统一落`~/workspace/bilibili-scripts/`项目（首次使用先建目录、README和AGENTS.md），用户当次另指定的除外
+- 产出目录：统一落`/Users/zrf/workspace/bilibili-scripts/`项目（首次使用先建目录、README和AGENTS.md），用户当次另指定的除外
 
 ### 数据分析报告
 
-- 流程权威：`~/.codex/skills/business-analyst`，日常层执行
+- 流程权威：`~/.claude/skills/business-analyst`，日常层执行
 - 报告结论人过目后才能给任何外部人看（判断节点3的延伸：对外的都要人点头）
 
 ### 知识库归档与巡库
@@ -71,14 +67,14 @@
 
 ### 动手阶段的审美来源（按页面类型路由）
 
-权威在`~/.codex/rules/sub_agent_dispatch.md`「不派时怎么处理」和`~/.codex/agents/code-writer.toml`第7条，本文件不复述。一句话版：营销类页面（落地页/官网/招募页/作品集）用taste-skill，中文页面配`~/.codex/rules/cn_typography.md`字体补丁；产品UI/看板/多步应用界面用frontend-design（taste-skill自我声明不覆盖这类）。
+权威在`~/.claude/rules/sub_agent_dispatch.md`「不派时怎么处理」和`~/.claude/agents/code-writer.md`第7条，本文件不复述。一句话版：营销类页面（落地页/官网/招募页/作品集）用taste-skill，中文页面配`~/.claude/rules/cn_typography.md`字体补丁；产品UI/看板/多步应用界面用frontend-design（taste-skill自我声明不覆盖这类）。
 
 ### 新营销页四步流水线
 
-1. 定调：从`~/.codex/design-md/`（74个品牌设计体系库）挑气质接近的，拷它的DESIGN.md进项目根当锚
+1. 定调：从`~/.claude/design-md/`（74个品牌设计体系库）挑气质接近的，拷它的DESIGN.md进项目根当锚
 2. 查参：ui-ux-pro-max按产品类型查配色、字体搭配、UX守则
 3. 动手：按上面的页面类型路由加载审美skill；整页新方案可先派ui-designer出方案文档
-4. 审查：impeccable的audit模式过一遍，界面文字过`~/.codex/skills/ui-copy-check/SKILL.md`七类（产出重写文字），`~/.codex/rules/ui_engineering_baseline.md`当硬门槛
+4. 审查：impeccable的audit模式过一遍，界面文字过`~/.claude/skills/ui-copy-check/SKILL.md`七类（产出重写文字），`~/.claude/rules/ui_engineering_baseline.md`当硬门槛
 
 ### 纪律
 
@@ -97,5 +93,5 @@
 ## 跨工具执行注意
 
 - Codex/kimi code执行者收到模板后，第一步永远是Read列出的文件，禁止凭记忆执行
-- 飞书凭证只给位置（`~/.codex/rules/feishu_credentials.local.md`），明文永不进prompt（教训见`~/.codex/rules/error_log.md`第1条）
-- Windows环境跑飞书脚本的坑（curl中文乱码、/tmp不存在）见`~/.codex/rules/feishu_doc_write.md`和error_log第5条
+- 飞书凭证只给位置（`~/.claude/rules/feishu_credentials.local.md`），明文永不进prompt（教训见`~/.claude/rules/error_log.md`第1条）
+- Windows环境跑飞书脚本的坑（curl中文乱码、/tmp不存在）见`~/.claude/rules/feishu_doc_write.md`和error_log第5条

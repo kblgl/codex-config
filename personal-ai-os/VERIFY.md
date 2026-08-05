@@ -6,17 +6,17 @@
 
 ## V1 路由验证（验global AGENTS.md → SYSTEM.md → skill这条链）
 
-新开一个Claude Code会话（模型用Opus级），只说一句「整理今天的答疑」。
+新开一个Codex会话（模型用Opus级），只说一句「整理今天的答疑」。
 
 - 过：它自己找到live-qa-archive流程并按九步开始执行，全程你的纠正≤1次
-- 不过：它现场发明流程。说明路由链断了，检查`~/.codex/AGENTS.md`到SYSTEM.md到SKILL.md的指向哪一环没接上
+- 不过：它现场发明流程。说明路由链断了，检查`~/.claude/AGENTS.md`到SYSTEM.md到SKILL.md的指向哪一环没接上
 
 ## V2 跨工具验证（验工具无关性）
 
-在kimi code或Codex里，第一条消息：「先Read ~/.codex/personal-ai-os/SYSTEM.md，然后<和V1相同的任务>」。
+在kimi code或Codex里，第一条消息：「先Read ~/.claude/personal-ai-os/SYSTEM.md，然后<和V1相同的任务>」。
 
 - 过：能按同一流程执行，允许工具差异造成的小磕绊
-- 不过：卡死在某个只有Claude Code才有的依赖上。把那个依赖找出来，改成纯文件引用
+- 不过：卡死在某个只有Codex才有的依赖上。把那个依赖找出来，改成纯文件引用
 
 ## V3 模板验证（验templates.md）
 

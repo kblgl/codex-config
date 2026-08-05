@@ -3,8 +3,6 @@ name: live-lesson-deck
 description: 把一个做完的项目、明确主题或口喷转写稿做成可左右翻页播放的网页课件（单文件 lesson.html）。当用户要直播课件、备课、教学 deck、网页 PPT、lesson.html、把项目变成一节课、拿口喷转写稿做课件，或修改已有 deck（换案例、插页、重排、加编辑器）时使用。输出能上课讲的 HTML 课件，不是普通 PPT 美化或讲稿文档。
 ---
 
-> Codex 适配注：原技能的 `scripts/deck-surgery.mjs` 与 `scripts/verify-deck.mjs` 未随仓库分发。若本目录没有 `scripts/`，整页移动/插入/删除改为手动编辑 HTML 并同步 SECTIONS 与 NOTES；工程验证改按 `references/deck-verify.md` 的「脚本环境跑不了时」手工手册执行，检查项一致。
-
 # 核心原则
 
 1. 产出物：一份网页课件，浏览器打开、左右翻页、像 PPT 一样播放，并且有讲师能对着讲的课程逻辑

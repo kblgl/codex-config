@@ -4,29 +4,29 @@
 
 采访确认后建立本项目。关键决定：
 
-- 收编方式：只改`~/.codex/AGENTS.md`（纯新增），其余rules原地引用不复制，详见merge-notes.md
+- 收编方式：只改`~/.claude/AGENTS.md`（纯新增），其余rules原地引用不复制，详见merge-notes.md
 - 知识库主库定为`personal-note/obsidian-vault/`，维护交AI（周巡库），人只丢东西
 - 投资观察模块砍掉（用户不需要，细节见profile.local.md）
 - 研究方向（AI/Web3/DePIN）降级为B站文稿选题输入
-- 派工模板按跨工具（Codex/kimi code）自包含设计，不依赖Claude Code的skill机制
+- 派工模板按跨工具（Codex/kimi code）自包含设计，不依赖Codex的skill机制
 
 产出：SYSTEM.md、dispatch.md、checklist.md、templates.md、maintenance.md、VERIFY.md、global-AGENTS.md、merge-notes.md、README.md、AGENTS.md。顺手补了缺失的`_template/README.md`（workspace的AGENTS.md引用它但文件不存在）。
 
 待办：bilibili-script skill等用户给3到5篇文稿样本；D3课件流程实测；D4微信读书管道实测加Concepts初建；D5按VERIFY.md验证。
 
-## 2026-07-08 迁入~/.codex
+## 2026-07-08 迁入~/.claude
 
-用户提议把制度仓库从workspace迁到`~/.codex/personal-ai-os/`（制度属全局配置，放沙箱定位不对）。执行：mv整目录、全文路径改写为`~/.codex/personal-ai-os/`、删除global-AGENTS.md并废除同步机制（本目录已和AGENTS.md同仓库，直接改，双副本漂移风险归零）、`~/.codex/AGENTS.md`三处引用改为仓库内相对链接。残留检查过，无旧路径引用。
+用户提议把制度仓库从workspace迁到`~/.claude/personal-ai-os/`（制度属全局配置，放沙箱定位不对）。执行：mv整目录、全文路径改写为`~/.claude/personal-ai-os/`、删除global-AGENTS.md并废除同步机制（本目录已和AGENTS.md同仓库，直接改，双副本漂移风险归零）、`~/.claude/AGENTS.md`三处引用改为仓库内相对链接。残留检查过，无旧路径引用。
 
 ## 2026-07-11 设计技能栈落地与制度v1.1
 
-- 新装设计资产：impeccable（审查）、ui-ux-pro-max加banner-design（参数库/banner）、shadcn（组件库操作）、design-md（74品牌风格锚点库，装在~/.codex/design-md/）。ui-ux-pro-max套件另5个子skill跳过（slides会截胡live-lesson-deck，其余重复）
+- 新装设计资产：impeccable（审查）、ui-ux-pro-max加banner-design（参数库/banner）、shadcn（组件库操作）、design-md（74品牌风格锚点库，装在~/.claude/design-md/）。ui-ux-pro-max套件另5个子skill跳过（slides会截胡live-lesson-deck，其余重复）
 - 审美路由定案（用户实测偏好）：营销页taste-skill加cn_typography.md中文字体补丁（新建），产品UI用frontend-design。写入code-writer.md第7条、sub_agent_dispatch.md、重写ui-designer.md步骤二（A/B线分流）
 - dispatch.md升v1.1：增harness分工（Claude主力/Codex编码第二意见/kimi机械层）、设计轨（页面类型路由加新营销页四步流水线）。SYSTEM.md模型分层表补harness归属
 
 ## 2026-07-11 测试方法论切换到mattpocock版TDD
 
-装入mattpocock/skills的tdd skill（~/.codex/skills/tdd/，SKILL.md加tests.md加mocking.md，MIT）。旧test-driven-development skill经git rm移除（历史可恢复）。sub_agent_dispatch.md「何时写测试」重写：命中写测试场景的编码任务默认走红绿循环（原先是实现完补测试、TDD仅显式触发）；三条硬规则入库（seam先确认、垂直切片、重构归review阶段）；派writer改为「本体先写seam测试，writer让测试变绿且不许改测试」；并行测试subagent模板补seam和反模式约束。写测试/不写测试的场景清单未动。
+装入mattpocock/skills的tdd skill（~/.claude/skills/tdd/，SKILL.md加tests.md加mocking.md，MIT）。旧test-driven-development skill经git rm移除（历史可恢复）。sub_agent_dispatch.md「何时写测试」重写：命中写测试场景的编码任务默认走红绿循环（原先是实现完补测试、TDD仅显式触发）；三条硬规则入库（seam先确认、垂直切片、重构归review阶段）；派writer改为「本体先写seam测试，writer让测试变绿且不许改测试」；并行测试subagent模板补seam和反模式约束。写测试/不写测试的场景清单未动。
 
 ## 2026-07-11 装入mattpocock工程流骨干
 
@@ -101,7 +101,7 @@ Day1清单里三句重写（图省事说出来就行、从定位长出功能、�
 
 ## 2026-07-21 juzhang-lesson-script吸收卡兹克反应类口癖
 
-用户在AI四层进化视频稿会话中判定原风格「太偏讲课」，点名吸收卡兹克口癖（我当时就愣了一下、还能不能让人活了、那确实能累死你、魔幻吧等）。走maintenance例外二（会话内当场明确指示），直接改`~/.codex/skills/juzhang-lesson-script/SKILL.md`：
+用户在AI四层进化视频稿会话中判定原风格「太偏讲课」，点名吸收卡兹克口癖（我当时就愣了一下、还能不能让人活了、那确实能累死你、魔幻吧等）。走maintenance例外二（会话内当场明确指示），直接改`~/.claude/skills/juzhang-lesson-script/SKILL.md`：
 
 - 第五步新增「吸收词库：卡兹克反应类口癖」小节：7项白名单加同族扩展判据，频次纪律同签名词
 - 边界：只收反应类，不收卡兹克结构签名（固定开场、固定收尾、机灵回环仍禁）；卡兹克禁词表不随之生效（说白了、本质上仍是橘长真词）；「愣了一下」列为AI腔禁令12的用户批准例外
@@ -115,7 +115,7 @@ Day1清单里三句重写（图省事说出来就行、从定位长出功能、�
 
 ## 2026-07-21 口癖从吸收改为收纳，词表落reference文件
 
-用户澄清意图：不是当外来借用管着，是收纳进自己的skill当自有词。执行：新建`~/.codex/skills/juzhang-lesson-script/references/khazix-absorbed.md`（七类词表加手法层加不收纳清单，与三档口头禅表并列），SKILL.md的大段词表压缩成原则加指针，小节改名「收纳词库」。重口味档（尼玛、有个屁的、太特么赤鸡了、老阴逼、不是哥们）按用户「收纳它的口癖」的表述从候选区转入正表，标注情绪顶点专用加一稿合计1到2次上限，用户可随时在词表里划掉单词。结构机制（固定开场收尾、回环、人物画像、文化升维）维持不收。仍走maintenance例外二。
+用户澄清意图：不是当外来借用管着，是收纳进自己的skill当自有词。执行：新建`~/.claude/skills/juzhang-lesson-script/references/khazix-absorbed.md`（七类词表加手法层加不收纳清单，与三档口头禅表并列），SKILL.md的大段词表压缩成原则加指针，小节改名「收纳词库」。重口味档（尼玛、有个屁的、太特么赤鸡了、老阴逼、不是哥们）按用户「收纳它的口癖」的表述从候选区转入正表，标注情绪顶点专用加一稿合计1到2次上限，用户可随时在词表里划掉单词。结构机制（固定开场收尾、回环、人物画像、文化升维）维持不收。仍走maintenance例外二。
 
 ## 2026-07-21 口癖词表去卡兹克前缀
 

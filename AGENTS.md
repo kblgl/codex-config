@@ -1,6 +1,15 @@
 # 全局约定索引
 
-本文件是规则地图，只放【做什么用什么原则】和【何时跳过】的速查。详细规则按需 Read 对应子文件。
+本文件是规则地图，只放【做什么用什么原则】和【何时跳过】的速查。详细规则按需 Read 对应子文件（均在 `~/.codex/` 下）。
+
+## 规则文件地图（先分清再引用）
+
+本机有两份 AGENTS.md，职责不同，引用规则前先看清是哪份：
+
+- 全局 `~/.codex/AGENTS.md`（本文件）：跨项目通用规则，会同步到公开仓库 kblgl/codex-config
+- 工作区根目录的 `AGENTS.md`（当前 cwd 所在目录，目录名因机器而异，如 WorkSpace）：沙箱目录规范（子项目、共享目录、工作日志、GitHub 配置同步、个人档案），含个人专属章节，永不推送；仓库对应通用版 `workspace-template/AGENTS.md`
+- 关系：工作区引用全局规则，全局不引用工作区内容
+- 陈述"某个规则文件里写了什么"之前，先 Read 或 grep 对应文件核实归属，禁止凭记忆
 
 ## 任务 preflight（最高优先级，所有任务的第 0 步）
 
@@ -9,7 +18,7 @@
 1. **检查目标项目的 AGENTS.md**：当前 cwd 或目标路径所在项目根目录有 `AGENTS.md` 吗？
    - **没有**：停下，向用户提议建项目 AGENTS.md，确认建完再动手。**禁止**用全局 AGENTS.md 或父目录 AGENTS.md（如工作区级）替代项目级规范，它们的覆盖面不同。
    - **有**：Read 整份，按里面的约定执行（命名、路径、字段 schema、版式偏好、踩坑等）。
-   - **被用户指出错误时**：严重错误直接写入 [rules/error_log.md](~/.codex/rules/error_log.md)，一般错误写入本项目的 AGENTS.md
+   - **被用户指出错误时**：严重错误直接写入 `~/.codex/rules/error_log.md`，一般错误写入本项目的 AGENTS.md
 
 2. **扫一眼禁用项**
    - 项目 AGENTS.md 里有「禁止/不要这样做」的清单吗？提前避开。
@@ -37,39 +46,38 @@
 
       - 注意：简洁是指删掉废话和车轱辘话，不是把每个词砍短。该用的字要用够。
 
+4. **引用规则归属必须核实**：陈述"某个 AGENTS.md / 规则文件里写了什么"之前，先 Read 或 grep 对应文件确认来源（全局 `~/.codex/AGENTS.md`、当前工作区根目录的 `AGENTS.md`、具体规则文件三选一），禁止凭记忆作答。已经两次因凭记忆混淆全局与工作区规则（见 error_log #12），这条是防再犯的硬检查。
 
 跳过 preflight 直接动手，违反「约束先行」原则。这条比下面任何原则都先生效。
 
 ## 个人 AI 操作系统（内容生产类任务的总入口）
 
-制度仓库：[personal-ai-os/](~/.codex/personal-ai-os/)（`~/.codex` 下）
+制度仓库：`~/.codex/personal-ai-os/`
 
-以下任务动手前先 Read [personal-ai-os/SYSTEM.md](~/.codex/personal-ai-os/SYSTEM.md)，按其路由走：备课/课件制作、直播答疑归档、B 站视频文稿、知识库归档与巡库、数据分析报告、界面与营销页设计（落地页/官网/招募页/看板，路由到 dispatch.md 设计轨）。编码类任务不走这里，照下方委派规则执行。
+以下任务动手前先 Read `~/.codex/personal-ai-os/SYSTEM.md`，按其路由走：备课/课件制作、直播答疑归档、B站视频文稿、知识库归档与巡库、数据分析报告、界面与营销页设计（落地页/官网/招募页/看板，路由到 dispatch.md 设计轨）。编码类任务不走这里，照下方委派规则执行。
 
-- 人的判断节点、红线、产出验收标准：[personal-ai-os/checklist.md](~/.codex/personal-ai-os/checklist.md)，内容类产出交付前必须过对应组
-- 派工模板：[personal-ai-os/templates.md](~/.codex/personal-ai-os/templates.md)
-- 制度文件的修改：AI 只能提议，流程见 [personal-ai-os/maintenance.md](~/.codex/personal-ai-os/maintenance.md)
-
-注意：个人 AI 操作系统部分含原作者的私有路径与业务约定（飞书凭证、知识库路径等），未在本机配置的部分按 SYSTEM.md 里的说明向用户确认，不要凭空假设路径存在。
+- 人的判断节点、红线、产出验收标准：`~/.codex/personal-ai-os/checklist.md`，内容类产出交付前必须过对应组
+- 派工模板：`~/.codex/personal-ai-os/templates.md`
+- 制度文件的修改：AI 只能提议，流程见 `~/.codex/personal-ai-os/maintenance.md`
 
 ## 委派与主线分工
 
-本体攥住主线，重活和可并行的独立工作包委派给子代理；产品策略和需求拆解类的强交互工作由本体加载对应 skill（product-strategy / product-breakdown）主线执行。**编码类**工作哪些活怎么分、完整流程顺序、何时跳过，唯一权威是 [rules/sub_agent_dispatch.md](~/.codex/rules/sub_agent_dispatch.md)；**内容生产类**（课件、答疑归档、文稿、知识库、数据分析）的调度权威是 [personal-ai-os/dispatch.md](~/.codex/personal-ai-os/dispatch.md)。本文件不另设标准。
+本体攥住主线，重活和可并行的独立工作包委派给 subagent；产品策略和需求拆解类的强交互工作由本体加载对应 skill（product-strategy / product-breakdown）主线执行。**编码类**工作哪些活怎么分、完整流程顺序、何时跳过，唯一权威是 `~/.codex/rules/sub_agent_dispatch.md`；**内容生产类**（课件、答疑归档、文稿、知识库、数据分析）的调度权威是 `~/.codex/personal-ai-os/dispatch.md`。本文件不另设标准。
 
-子代理以官方 TOML 格式提供：code-reviewer、code-writer、ui-designer、ux-reviewer（位于 `~/.codex/agents/` 下，每个角色一个 `.toml` 文件）。
+Codex 侧的执行方式：编码类工作按 `~/.codex/agents/` 下定义的自定义 agent 委派——`code-writer`（实现）、`code-reviewer`（代码审查）、`ui-designer`（界面方案）、`ux-reviewer`（体验审查）。需要并行时，在委派指令里点名对应 agent 名称，让 Codex 以子代理方式并行运行并汇总结果；两个 reviewer 独立产出，由本体合并。
 
 ## 规则清单
 
-- [rules/no_ai_style.md](~/.codex/rules/no_ai_style.md) — 禁用 AI 腔表达。**每次对话开始时必须 Read**
-- [rules/error_log.md](~/.codex/rules/error_log.md) — 历史错误提炼的强制规则。**每次对话开始时必须 Read**
-- [rules/code_rules.md](~/.codex/rules/code_rules.md) — 编码行为准则（先思考、简单优先、外科手术式改动、目标驱动）。**涉及写代码/改代码的任务开始前必须 Read**
-- [personal-ai-os/SYSTEM.md](~/.codex/personal-ai-os/SYSTEM.md) — 个人 AI 操作系统总纲。**内容生产类任务开始前必须 Read**
-- [rules/feishu_doc_write.md](~/.codex/rules/feishu_doc_write.md) — 飞书文档写入规则、约束与调用流程（依赖本机飞书凭证，未配置则跳过相关流程）
-- [rules/ui_engineering_baseline.md](~/.codex/rules/ui_engineering_baseline.md) — 前端工程正确性底线清单，ui-designer/code-reviewer 按需 Read
+- `~/.codex/rules/no_ai_style.md` — 禁用AI腔表达。**每次对话开始时必须 Read**
+- `~/.codex/rules/error_log.md` — 历史错误提炼的强制规则。**每次对话开始时必须 Read**
+- `~/.codex/rules/code_rules.md` — 编码行为准则（先思考、简单优先、外科手术式改动、目标驱动）。**涉及写代码/改代码的任务开始前必须 Read**
+- `~/.codex/personal-ai-os/SYSTEM.md` — 个人AI操作系统总纲。**内容生产类任务开始前必须 Read**
+- `~/.codex/rules/feishu_doc_write.md` — 飞书文档写入规则、约束与调用流程
+- `~/.codex/rules/ui_engineering_baseline.md` — 前端工程正确性底线清单，ui-designer/code-reviewer 按需 Read
 
 ## 测试
 
-测试归本体写，code-writer 不写测试。何时写、谁写、阈值、体量分级见 [rules/sub_agent_dispatch.md](~/.codex/rules/sub_agent_dispatch.md) 的「何时写测试 / 谁写测试」章节。
+测试归本体写，code-writer 不写测试。何时写、谁写、阈值、体量分级见 `~/.codex/rules/sub_agent_dispatch.md` 的「何时写测试 / 谁写测试」章节。
 
 ## 思维原则
 
@@ -92,13 +100,13 @@
 - **默认中文**：代码、命令、变量名用英文
 - **结论先行，再给理由**：不要先铺垫背景，直接说结论，少说废话，节省时间
 - **遇到模糊需求**：先给最合理的方案，再问要不要调整，不要自己默认选择一个答案
-- **少用专业术语**：跟我说话默认我不懂技术黑话（CSS 属性名、代码里的类名、行业黑话等），优先大白话说清楚在做什么、为什么。绕不开术语时，顺手把人话解释带一句，不要甩一个术语就当讲完了
+- **少用专业术语**：跟我说话默认我不懂技术黑话（CSS属性名、代码里的类名、行业黑话等），优先大白话说清楚在做什么、为什么。绕不开术语时，顺手把人话解释带一句，不要甩一个术语就当讲完了
 
 ## 通用工程纪律
 
 - **找根本原因**：不要为了让代码跑起来注释掉报错或加绕过标记，
 - **密钥安全**：密钥、token、密码不进代码、不进 commit、不进日志
-- **SSH 密钥不要假设没配**：涉及 push 到远端仓库、拉取云仓代码、部署到服务器（git/scp/rsync/ssh）前，先 `ls ~/.ssh/` 看有没有 key、再 `ssh -T git@github.com` 或 `ssh -o BatchMode=yes <host>` 验通。SSH 通了就直接走 SSH 路径（remote 改成 `git@github.com:...` 或目标 host），不要默认问 token、不要建议改 HTTPS、不要等我提示「我有 SSH key」才想起来查。理由：非交互 shell 里 HTTPS 无法弹密码框，默认走 HTTPS 一定卡在 `could not read Username`；SSH 通就一次过
-- **方案先行**：大改动前先在 Plan Mode 出方案，我确认后再动手
+- **SSH 密钥不要假设没配**：涉及 push 到远端仓库、拉取云仓代码、部署到服务器（git/scp/rsync/ssh）前，先 `ls ~/.ssh/` 看有没有 key、再 `ssh -T git@github.com` 或 `ssh -o BatchMode=yes <host>` 验通。SSH 通了就直接走 SSH 路径（remote 改成 `git@github.com:...` 或目标 host），不要默认问 token、不要建议改 HTTPS、不要等我提示「我有 SSH key」才想起来查。理由：HTTPS 在 Codex 这类非交互 shell 里没法弹密码框，默认走 HTTPS 一定卡在 `could not read Username`；SSH 通就一次过
+- **方案先行**：大改动前先在 plan 模式出方案，我确认后再动手
 - **任务归档**：任何非平凡任务的工作日志，必须归档到项目文件夹中，保留工作日志
 - **并行执行 tool call**：同一 message 内多个 tool call 默认并发跑。独立操作（多文件 Read、多文件 Edit、多个 Grep、独立 Bash 命令）直接并行，wall-clock 显著省时间。同一文件多次 Edit 按声明顺序自动串行执行，不会冲突。**只在有顺序依赖时才分回合串行**：先 Read 才能精确 Edit、先 Bash 拿输出才能判断下一步、破坏性操作前要确认前一步结果。规则化重构（边界清晰的多文件改动）最吃这套

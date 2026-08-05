@@ -2,15 +2,15 @@
 
 不同 agent 平台的记忆系统和项目配置文件位置不一样。执行第一步盘点时按你正在使用的平台查这张表。
 
-## Claude Code
+## Codex
 
 | 用途 | 路径 |
 |---|---|
-| 跨会话记忆(全局) | `~/.codex/projects/<encoded-project-path>/memory/` |
-| 记忆索引文件 | `~/.codex/projects/<...>/memory/MEMORY.md` |
-| 全局指令 | `~/.codex/AGENTS.md` |
+| 跨会话记忆(全局) | `~/.claude/projects/<encoded-project-path>/memory/` |
+| 记忆索引文件 | `~/.claude/projects/<...>/memory/MEMORY.md` |
+| 全局指令 | `~/.claude/AGENTS.md` |
 | 项目级指令 | 项目根 `AGENTS.md`(可层级嵌套) |
-| Skills 目录 | `~/.codex/skills/<name>/SKILL.md` |
+| Skills 目录 | `~/.claude/skills/<name>/SKILL.md` |
 
 记忆文件用 YAML frontmatter:`name`、`description`、`type`(user / feedback / project / reference)。
 
@@ -44,7 +44,7 @@
 
 **加载优先级**：workspace > project-agent > personal-agent > managed/local > bundled > extra dirs。同名 skill 高优先级覆盖低优先级。
 
-OpenClaw 没有独立的"记忆文件 + 索引"机制，跨会话信息可放在项目根的 markdown（AGENTS.md / AGENTS.md / 等价文件）里，参照 Codex 的做法。frontmatter 支持 `metadata.openclaw` 字段做加载时的 gating（按 OS、环境变量、二进制依赖筛选），但不是 neat-freak 必需的。
+OpenClaw 没有独立的"记忆文件 + 索引"机制，跨会话信息可放在项目根的 markdown（AGENTS.md / 等价文件）里，参照 Codex 的做法。frontmatter 支持 `metadata.openclaw` 字段做加载时的 gating（按 OS、环境变量、二进制依赖筛选），但不是 neat-freak 必需的。
 
 ## OpenCode
 
@@ -52,15 +52,15 @@ OpenClaw 没有独立的"记忆文件 + 索引"机制，跨会话信息可放在
 |---|---|
 | 全局配置 | `~/.config/opencode/` |
 | 项目配置 | `.opencode/` |
-| Skills 目录(项目) | `.opencode/skills/`、`.codex/skills/`、`.codex/skills/` 都会被扫描 |
-| Skills 目录(全局) | `~/.config/opencode/skills/`、`~/.codex/skills/`、`~/.codex/skills/` |
+| Skills 目录(项目) | `.opencode/skills/`、`.claude/skills/`、`.codex/skills/` 都会被扫描 |
+| Skills 目录(全局) | `~/.config/opencode/skills/`、`~/.claude/skills/`、`~/.codex/skills/` |
 
-OpenCode 同时读取 Claude Code 和 Codex 的目录,所以同一个 skill 装在 `~/.codex/skills/` 下的话三家都能识别。OpenClaw 走自己的 `~/.openclaw/skills/`，需要单独装一份（或用符号链接）。
+OpenCode 同时读取 Codex 和 Codex 的目录,所以同一个 skill 装在 `~/.claude/skills/` 下的话三家都能识别。OpenClaw 走自己的 `~/.openclaw/skills/`，需要单独装一份（或用符号链接）。
 
 ## 如果当前 agent 没有独立记忆系统
 
 跳过"记忆"那一层,把功夫全花在:
-- 项目根 markdown(AGENTS.md / AGENTS.md / 本平台等价文件)
+- 项目根 markdown(AGENTS.md / 本平台等价文件)
 - README.md
 - docs/
 
@@ -68,7 +68,7 @@ OpenCode 同时读取 Claude Code 和 Codex 的目录,所以同一个 skill 装�
 
 ## 跨平台共存策略
 
-如果一个项目同时被 Claude Code 用户和 Codex 用户使用:
+如果一个项目同时被 Codex 用户和 Codex 用户使用:
 
 - **`AGENTS.md` 是真身,`AGENTS.md` 是指向它的软链**(`ln -s AGENTS.md AGENTS.md`),永远只编辑 AGENTS.md
 - **绝不允许两份独立维护**——两处真相必然分叉,分叉必然有一边烂。发现两份内容不一致的独立文件,按 SKILL.md 第二步的处置分级走:合并需要人工确认哪边是权威,列「待你拍板」

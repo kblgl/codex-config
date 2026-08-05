@@ -1,19 +1,19 @@
 # SYSTEM.md 个人AI操作系统总纲
 
 版本：v1.1（2026-07-08 Fable 5起草，07-11模型分层表补harness归属）
-位置：`~/.codex/personal-ai-os/SYSTEM.md`
+位置：`~/.claude/personal-ai-os/SYSTEM.md`
 
-本文件是整套制度的入口。任何AI工具（Claude Code、Codex、kimi code）开始非平凡任务前先读本文件，再按文件地图跳到需要的细则。制度的存在目的只有一个：让不如顶级模型聪明的执行者，也能产出接近顶级判断的结果。
+本文件是整套制度的入口。任何AI工具（Codex、Codex、kimi code）开始非平凡任务前先读本文件，再按文件地图跳到需要的细则。制度的存在目的只有一个：让不如顶级模型聪明的执行者，也能产出接近顶级判断的结果。
 
 ## 用户是谁
 
-完整画像在`~/.codex/personal-ai-os/profile.local.md`（本地文件，gitignore排除，不入公开库），内容生产类任务开始前连同本文件一起Read，该文件缺失说明在新机器上，向用户要一份。
+完整画像在`~/.claude/personal-ai-os/profile.local.md`（本地文件，gitignore排除，不入公开库），内容生产类任务开始前连同本文件一起Read，该文件缺失说明在新机器上，向用户要一份。
 
 可公开部分：
 
 - 主业：AI课程开发与教学（B站方向），每周固定直播答疑一次加备课（备课是耗时最大头）
 - 技术背景：数据分析与数仓开发出身
-- 默认中文沟通，厌恶AI腔（硬约束见 `~/.codex/rules/no_ai_style.md`）
+- 默认中文沟通，厌恶AI腔（硬约束见 `~/.claude/rules/no_ai_style.md`）
 - 写作与教学哲学：核心是取舍，只教最有用的
 
 ## 三条主工作流
@@ -22,17 +22,15 @@
 
 | 工作流 | 频率 | 流程权威文档 | 产出 |
 |--------|------|--------------|------|
-| 备课/课件生产 | 每周，耗时最大 | `~/.codex/skills/live-lesson-deck/SKILL.md` | lesson.html网页课件 |
-| 直播答疑归档 | 每周一次 | `~/.codex/skills/live-qa-archive/SKILL.md` | 飞书wiki笔记+讲课PPT |
-| B站视频文稿 | 不定期 | `~/.codex/skills/juzhang-lesson-script/SKILL.md`（视频稿模式，橘长本人声线，2026-07-21用户定向；linyi-lyi-scriptwriter保留为林亦风格备选） | 可朗读的视频文稿 |
+| 备课/课件生产 | 每周，耗时最大 | `~/.claude/skills/live-lesson-deck/SKILL.md` | lesson.html网页课件 |
+| 直播答疑归档 | 每周一次 | `~/.claude/skills/live-qa-archive/SKILL.md` | 飞书wiki笔记+讲课PPT |
+| B站视频文稿 | 不定期 | `~/.claude/skills/juzhang-lesson-script/SKILL.md`（视频稿模式，橘长本人声线，2026-07-21用户定向；linyi-lyi-scriptwriter保留为林亦风格备选） | 可朗读的视频文稿 |
 
-> Codex 适配注：live-qa-archive、juzhang-lesson-script、linyi-lyi-scriptwriter 是原作者的个人业务技能（依赖其飞书凭证与特定人声语料），本机未安装。对应工作流如需启用，需先向用户确认业务对象与凭证。
-
-次要工作流：编码开发（调度看dispatch.md编码轨）、界面与营销页设计（dispatch.md设计轨：营销页taste-skill加cn_typography中文补丁，产品UI用frontend-design）、数据分析（`~/.codex/skills/business-analyst`）、知识库归档与巡库（见下节）。
+次要工作流：编码开发（调度看dispatch.md编码轨）、界面与营销页设计（dispatch.md设计轨：营销页taste-skill加cn_typography中文补丁，产品UI用frontend-design）、数据分析（`~/.claude/skills/business-analyst`）、知识库归档与巡库（见下节）。
 
 ## 知识库架构（主库已定，不再纠结选型）
 
-主库：`~/workspace/personal-note/obsidian-vault/`，本地markdown。
+主库：`/Users/zrf/workspace/personal-note/obsidian-vault/`，本地markdown。
 
 定这里的理由：选知识库的第一标准是AI能直接读写，本地markdown满足；vault已有flomo增量导入管道和Notes/Concepts结构，不必新建；Obsidian只当查看器。之前印象笔记加Obsidian失败的根因是维护靠人，现在维护全部交给AI（周巡库任务），人只负责往里丢东西。
 
@@ -54,8 +52,8 @@
 
 | 层 | 模型与harness | 干什么 |
 |----|---------------|--------|
-| 顶层 | 当期最强模型（现Fable 5，窗口期后是新旗舰），Claude Code | 制度修订提议、课程主线设计、skill创建与打磨、写作风格提炼 |
-| 日常层 | Opus 4.8级走Claude Code；Codex 5.6当编码第二意见与并行执行器 | 按流程文档执行备课页面制作、答疑归档、文稿初稿、编码；跨模型代码审查 |
+| 顶层 | 当期最强模型（现Fable 5，窗口期后是新旗舰），Codex | 制度修订提议、课程主线设计、skill创建与打磨、写作风格提炼 |
+| 日常层 | Opus 4.8级走Codex；Codex 5.6当编码第二意见与并行执行器 | 按流程文档执行备课页面制作、答疑归档、文稿初稿、编码；跨模型代码审查 |
 | 机械层 | kimi code或任意便宜模型 | 格式化落盘、数据抓取清洗、WORKLOG汇总、飞书批量读写、巡库 |
 
 harness分工细则（各自干什么、纪律）见dispatch.md「harness分工」一节。
@@ -64,9 +62,9 @@ harness分工细则（各自干什么、纪律）见dispatch.md「harness分工�
 
 ## 跨工具入口
 
-- **Codex**：自动读`~/.codex/AGENTS.md`，其中已指向本文件
-- **Codex / kimi code**：会话第一条消息写「先Read ~/.codex/personal-ai-os/SYSTEM.md再开工」
-- 所有skill都是纯markdown流程文档，不依赖Claude Code的skill加载机制，任何工具Read路径即可照做
+- **Codex**：自动读`~/.claude/AGENTS.md`，其中已指向本文件
+- **Codex / kimi code**：会话第一条消息写「先Read ~/.claude/personal-ai-os/SYSTEM.md再开工」
+- 所有skill都是纯markdown流程文档，不依赖Codex的skill加载机制，任何工具Read路径即可照做
 - 派工模板（templates.md）自包含：绝对路径、步骤、产出位置、自检清单全在prompt里，执行者不需要本对话的上下文
 
 ## 文件地图

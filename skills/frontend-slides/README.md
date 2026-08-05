@@ -1,6 +1,6 @@
 # Frontend Slides
 
-A coding-agent skill for creating stunning HTML presentations — from scratch or by converting PowerPoint files. It is packaged as a Claude Code plugin, and the core `SKILL.md` can also be read by other coding agents with filesystem and shell access.
+A coding-agent skill for creating stunning HTML presentations — from scratch or by converting PowerPoint files. It is packaged as a Codex plugin, and the core `SKILL.md` can also be read by other coding agents with filesystem and shell access.
 
 ## What This Does
 
@@ -21,9 +21,9 @@ https://github.com/user-attachments/assets/ef57333e-f879-432a-afb9-180388982478
 
 ## Installation
 
-### Via Claude Code Custom Marketplace Source
+### Via Codex Custom Marketplace Source
 
-Install directly from this public GitHub repo. Run these as two separate Claude Code messages; do not paste both lines into the prompt at once.
+Install directly from this public GitHub repo. Run these as two separate Codex messages; do not paste both lines into the prompt at once.
 
 ```text
 /plugin marketplace add https://github.com/zarazhangrui/frontend-slides
@@ -35,13 +35,13 @@ After that finishes, run:
 /plugin install frontend-slides@frontend-slides
 ```
 
-Use the HTTPS URL. The shorter `zarazhangrui/frontend-slides` form may make Claude Code try SSH, which can fail if GitHub is not already in your `known_hosts` file.
+Use the HTTPS URL. The shorter `zarazhangrui/frontend-slides` form may make Codex try SSH, which can fail if GitHub is not already in your `known_hosts` file.
 
-Then use it by typing `/frontend-slides:frontend-slides` in Claude Code. Claude Code namespaces plugin-installed skills as `/plugin-name:skill-name`.
+Then use it by typing `/frontend-slides:frontend-slides` in Codex. Codex namespaces plugin-installed skills as `/plugin-name:skill-name`.
 
-### Claude Code Manual Installation
+### Codex Manual Installation
 
-Copy the skill files to your Claude Code skills directory:
+Copy the skill files to your Codex skills directory:
 
 ```bash
 # Create the skill directory
@@ -59,7 +59,7 @@ Or clone directly:
 git clone https://github.com/zarazhangrui/frontend-slides.git ~/.codex/skills/frontend-slides
 ```
 
-Then use it by typing `/frontend-slides` in Claude Code. Standalone skills are not namespaced.
+Then use it by typing `/frontend-slides` in Codex. Standalone skills are not namespaced.
 
 ### Other Coding Agents
 
@@ -80,7 +80,7 @@ If the agent can read GitHub repos or browse files, it should start from `SKILL.
 
 Some agents can also install the skill for you if they have filesystem access and a known local skills directory. If not, they can still follow `SKILL.md` directly for the current session.
 
-The Claude Code plugin gives Claude Code a custom marketplace-source install flow and `/frontend-slides:frontend-slides` command. Other agents usually do not use that command surface.
+The Codex plugin gives Codex a custom marketplace-source install flow and `/frontend-slides:frontend-slides` command. Other agents usually do not use that command surface.
 
 ## Usage
 
@@ -92,7 +92,7 @@ The Claude Code plugin gives Claude Code a custom marketplace-source install flo
 > "I want to create a pitch deck for my AI startup"
 ```
 
-If installed manually as a standalone Claude Code skill, use `/frontend-slides` instead.
+If installed manually as a standalone Codex skill, use `/frontend-slides` instead.
 
 In non-Claude agents, ask the agent to use the Frontend Slides skill and point it at this repo or `SKILL.md`.
 
@@ -570,7 +570,7 @@ Uses [Playwright](https://playwright.dev) to screenshot each slide at 1920×1080
 ## Requirements
 
 - A local coding agent with filesystem access and the ability to run shell commands
-- Claude Code is required only for the custom marketplace-source install and `/frontend-slides:frontend-slides` command
+- Codex is required only for the custom marketplace-source install and `/frontend-slides:frontend-slides` command
 - For PPT conversion: Python with `python-pptx` library
 - For URL deployment: Node.js + Vercel account (free)
 - For PDF export: Node.js (Playwright installs automatically)

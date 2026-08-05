@@ -40,15 +40,15 @@ cd ~/.codex/skills
 git clone https://github.com/Zuokaiqi/claude-skill-business-analyst business-analyst
 ```
 
-重启 Claude Code 后，skill 会被自动加载。
+重启 Codex 后，skill 会被自动加载。
 
-### 方式二：作为 Claude Code Plugin 安装
+### 方式二：作为 Codex Plugin 安装
 
 ```bash
 claude plugin install Zuokaiqi/claude-skill-business-analyst
 ```
 
-（要求 Claude Code 已启用 plugin 支持）
+（要求 Codex 已启用 plugin 支持）
 
 ### 方式三：手动复制
 
@@ -66,7 +66,7 @@ PDF渲染默认走Playwright + Paged.js链路，具体安装步骤和CJK字体�
 
 ## 快速开始
 
-安装后，在 Claude Code 中直接说：
+安装后，在 Codex 中直接说：
 
 > 帮我分析一下 sales_q1.xlsx，老板想看下个季度该把预算压在哪个渠道
 

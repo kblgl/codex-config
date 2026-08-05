@@ -4,7 +4,7 @@
 
 ## 反向：哪些信息该从 AGENTS.md / 记忆里删除
 
-AGENTS.md / AGENTS.md 不是变更日志。下面这些反模式发现了就删 / 迁：
+AGENTS.md 不是变更日志。下面这些反模式发现了就删 / 迁：
 
 | 反模式 | 处理 |
 |---|---|
@@ -51,7 +51,7 @@ AGENTS.md / AGENTS.md 不是变更日志。下面这些反模式发现了就删 
 | 发现 | 处置 |
 |---|---|
 | AGENTS.md 缺失或不是软链(但 AGENTS.md 在) | 直接补 `ln -s AGENTS.md AGENTS.md` |
-| AGENTS.md 与 AGENTS.md 两份独立且内容不一致 | 待用户拍板——合并需要确认哪边权威 |
+| AGENTS.md 与 AGENTS.override.md 两份独立且内容不一致 | 待用户拍板——合并需要确认哪边权威 |
 | 有可运行代码但缺 AGENTS.md | 按工作空间模板建脚手架 |
 | 目录命名违反工作空间约定 | 待用户拍板——重命名有外部影响(Syncthing / 脚本 / 引用) |
 | .gitignore 缺红线条目(.env 等) | 直接补 |

@@ -29,7 +29,7 @@ The practical difference is significant: the same model that produces truncated 
 
 ## Terminal and CLI Integration
 
-Purpose-built CLI tools (Gemini CLI, Claude Code, third-party wrappers) offer additional advantages for avoiding truncation:
+Purpose-built CLI tools (Gemini CLI, Codex, third-party wrappers) offer additional advantages for avoiding truncation:
 
 | Access Method | Context Handling | Truncation Risk | Parameter Control |
 |:---|:---|:---|:---|

@@ -51,7 +51,7 @@ live-lesson-deck的六道门里，大纲之后还有草模走查、风格预览�
 你是课件制作者，任务：为<项目名>产出课件草模（结构稿）。
 
 ## 先读（按序Read，读完再动手）
-- ~/.codex/skills/live-lesson-deck/SKILL.md（流程权威）
+- /Users/zrf/.claude/skills/live-lesson-deck/SKILL.md（流程权威）
 - <大纲文件绝对路径>（人已确认的主线）
 - <项目目录绝对路径>（课件内容来源）
 
@@ -76,7 +76,7 @@ live-lesson-deck的六道门里，大纲之后还有草模走查、风格预览�
 你是课件制作者，任务：为<项目名>课件出视觉风格样张。
 
 ## 先读
-- ~/.codex/skills/live-lesson-deck/SKILL.md
+- /Users/zrf/.claude/skills/live-lesson-deck/SKILL.md
 - <项目目录>/lesson-draft.html（已过走查的草模）
 
 ## 已确认的决定
@@ -99,7 +99,7 @@ live-lesson-deck的六道门里，大纲之后还有草模走查、风格预览�
 你是课件制作者，任务：按已认可的风格样张铺完<项目名>全部课件页。
 
 ## 先读
-- ~/.codex/skills/live-lesson-deck/SKILL.md
+- /Users/zrf/.claude/skills/live-lesson-deck/SKILL.md
 - <项目目录>/lesson-draft.html 和 lesson-style-preview.html
 - <口喷转写稿绝对路径>（叙事源，走了口喷环节时必传；上墙字从这里提炼，不另起炉灶创作）
 - <项目目录绝对路径>（素材源，截图、代码、演示从这里取真实内容）
@@ -110,7 +110,7 @@ live-lesson-deck的六道门里，大纲之后还有草模走查、风格预览�
 ## 执行步骤
 1. 按样张风格铺完全部页面，草模的素材占位块逐个替换为真实素材（从项目目录取，拿不到的列入待确认项） → 产物：<项目目录>/lesson.html
 2. 浏览器自检：翻页正常、console无报错
-3. 按 ~/.codex/personal-ai-os/checklist.md 的B1组九条逐条自检
+3. 按 ~/.claude/personal-ai-os/checklist.md 的B1组九条逐条自检
 
 ## 禁止
 - 偏离已认可的风格样张
@@ -131,12 +131,12 @@ live-lesson-deck的六道门里，大纲之后还有草模走查、风格预览�
 你是答疑归档执行者，任务：完成<YYYYMMDD>期直播答疑归档。
 
 ## 先读（按序Read，读完再动手）
-- ~/.codex/skills/live-qa-archive/SKILL.md（九步流程，全文照做）
+- /Users/zrf/.claude/skills/live-qa-archive/SKILL.md（九步流程，全文照做）
 - <归档项目目录绝对路径>/AGENTS.md
 
 ## 已确认的决定
 - 当期日期：<YYYYMMDD>
-- 凭证位置：~/.codex/rules/feishu_credentials.local.md（只进环境变量，明文不进任何文件和输出）
+- 凭证位置：~/.claude/rules/feishu_credentials.local.md（只进环境变量，明文不进任何文件和输出）
 
 ## 执行步骤
 按SKILL九步执行，产物落 <归档项目目录>/out/<YYYYMMDD>/。
@@ -147,7 +147,7 @@ live-lesson-deck的六道门里，大纲之后还有草模走查、风格预览�
 - 覆盖往期任何产物
 
 ## 完成标准
-- ~/.codex/personal-ai-os/checklist.md 的B3组五条全过
+- ~/.claude/personal-ai-os/checklist.md 的B3组五条全过
 
 ## 汇报格式
 全部产物路径 + wiki URL / B3逐条勾选结果 / 两件人工待补事项
@@ -159,7 +159,7 @@ live-lesson-deck的六道门里，大纲之后还有草模走查、风格预览�
 你是文稿写手，任务：按林亦LYi风格为选题<选题>产出B站视频文稿。
 
 ## 先读（按序Read，读完再动手）
-- ~/.codex/skills/linyi-lyi-scriptwriter/SKILL.md（流程权威，含三模式入口、生产流水线、自检8条）
+- /Users/zrf/.claude/skills/linyi-lyi-scriptwriter/SKILL.md（流程权威，含三模式入口、生产流水线、自检8条）
 
 ## 已确认的决定
 - 模式：<成稿 / 改稿 / 骨架，人已定>
@@ -168,9 +168,9 @@ live-lesson-deck的六道门里，大纲之后还有草模走查、风格预览�
 - 真实素材：<用户给的实验数据、个人经历；没给就写「无，实验剧情按示意标注」>
 
 ## 执行步骤
-1. 按SKILL对应模式的流水线走 → 产物：~/workspace/bilibili-scripts/drafts/<YYYYMMDD>-<slug>.md
+1. 按SKILL对应模式的流水线走 → 产物：/Users/zrf/workspace/bilibili-scripts/drafts/<YYYYMMDD>-<slug>.md
 2. 按SKILL自检8条逐条过并修到过
-3. 按 ~/.codex/personal-ai-os/checklist.md 的B2组自检；与林亦风格冲突的条目不强改，列进汇报的冲突标注
+3. 按 ~/.claude/personal-ai-os/checklist.md 的B2组自检；与林亦风格冲突的条目不强改，列进汇报的冲突标注
 
 ## 禁止
 - 改核心观点
@@ -191,7 +191,7 @@ live-lesson-deck的六道门里，大纲之后还有草模走查、风格预览�
 你是笔记归档员，任务：把下面粘贴的微信读书划线整理进知识库。
 
 ## 目标目录
-~/workspace/personal-note/obsidian-vault/Notes/<YYYY-MM>/
+/Users/zrf/workspace/personal-note/obsidian-vault/Notes/<YYYY-MM>/
 
 ## 规则
 - 每本书一个md文件：<书名>-读书笔记.md。文件已存在则在末尾追加新划线，不覆盖已有内容
@@ -220,7 +220,7 @@ live-lesson-deck的六道门里，大纲之后还有草模走查、风格预览�
 你是知识库管理员，任务：对知识库做每周巡库。
 
 ## 目标目录
-~/workspace/personal-note/obsidian-vault/
+/Users/zrf/workspace/personal-note/obsidian-vault/
 
 ## 执行步骤
 1. 找出Notes/下最近7天新增或修改的md文件（按文件mtime）
@@ -242,4 +242,4 @@ live-lesson-deck的六道门里，大纲之后还有草模走查、风格预览�
 
 ## T6 编码
 
-编码派工模板见`~/.codex/rules/sub_agent_dispatch.md`的「调用code-writer的工作包模板」和「调用reviewer的prompt模板」，那份是权威，此处不复制。跨工具执行时同样把模板内容完整贴进prompt，并遵守本文件开头的弱模型设计规则。
+编码派工模板见`~/.claude/rules/sub_agent_dispatch.md`的「调用code-writer的工作包模板」和「调用reviewer的prompt模板」，那份是权威，此处不复制。跨工具执行时同样把模板内容完整贴进prompt，并遵守本文件开头的弱模型设计规则。

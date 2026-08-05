@@ -16,7 +16,7 @@
 
 - **同类问题被人纠正第2次，必须入库**，不许只口头改了这次
 - 入哪：
-  - 编码类、跨项目的严重错误 → `~/.codex/rules/error_log.md`（沿用其格式：触发条件、错误做法、根因、实证、正确做法）
+  - 编码类、跨项目的严重错误 → `~/.claude/rules/error_log.md`（沿用其格式：触发条件、错误做法、根因、实证、正确做法）
   - 内容产出类（课件、文稿、答疑）→ checklist.md对应组加一条，写成可勾选的具体标准，不写抽象教训
   - 流程执行类 → 对应SKILL.md里改
 - 每条带日期和实证。「要注意质量」这种写了等于没写，「开头30秒无具体钩子即不合格」才算一条
@@ -35,13 +35,13 @@
 
 ## 位置与副本
 
-- 本目录在`~/.codex`仓库内，和rules/同级。`~/.codex/AGENTS.md`直接改，全局约定没有源副本和同步步骤
+- 本目录在`~/.claude`仓库内，和rules/同级。`~/.claude/AGENTS.md`直接改，全局约定没有源副本和同步步骤
 - 所有制度文件被路径原地引用，没有副本就没有漂移
-- 版本管理走`~/.codex`仓库自己的git
+- 版本管理走`~/.claude`仓库自己的git
 
 ## 待建清单（Fable 5窗口内优先）
 
-- [x] **B站文稿skill**：2026-07-13定案，采用林亦LYi风格蒸馏skill（linyi-lyi-scriptwriter，源项目`~/workspace/20260711-linyi-lyi-distill/`），不再自建bilibili-script
+- [x] **B站文稿skill**：2026-07-13定案，采用林亦LYi风格蒸馏skill（linyi-lyi-scriptwriter，源项目`/Users/zrf/workspace/20260711-linyi-lyi-distill/`），不再自建bilibili-script
 - [ ] **课件流程实测**：拿一个真实项目走一遍T1全流程，用过程中暴露的问题修订live-lesson-deck和checklist的B1
 - [ ] **微信读书管道实测**：导出一本书的划线跑T4，验证模板可用
 - [ ] **Concepts索引初建**：第一次全量巡库，把存量Notes挂上索引

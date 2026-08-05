@@ -2,13 +2,6 @@
 
 **委派原则：本体攥住主线——意图、判断、上下文都在本体手里。subagent 领的是「工作包」，不是「思考」。**
 
-## 当前环境约束（临时，官方修复后移除）
-
-2026-08-02 确认：当前 Codex 桌面版 multi-agent v2 存在官方已知 bug（openai/codex issue #36321、#36376），DeepSeek 模型下子代理收不到派工消息，多次实测均复现，规避方案无效。官方修复之前：
-
-- 不派子代理，重活本体直接做
-- 官方修复状态由 `~/.codex/scripts/check-subagent-fix.ps1` 跟踪（每日 09:00 计划任务），issue 关闭并最小验证通过后恢复派工，再删除本节
-
 委派看两件事：**重量**（会产生你之后不回看的大量输出/探索）和**独立性**（能跟别的活并行）。够重或够独立才派；小活、跟当前对话紧耦合的活、需要全局语境的判断，本体直接做。
 
 能并行的独立工作包，在同一条消息里一起派，别串行排队。
@@ -21,7 +14,7 @@
 |------|----------------|
 | 商业判断、功能建议、体验改进（产品策略类） | 本体加载 product-strategy skill 主线执行；查证项>2个打包派 general-purpose 去搜 |
 | 产品结构梳理、单功能拆解、补AC | 本体加载 product-breakdown skill 主线共创、每步确认每步落盘 |
-| 一口气拆解（输入已明确、要隔离重输出或并行批量，如一次补多个功能的AC） | general-purpose subagent，prompt给 product-breakdown skill 路径+输入文件+一口气模式声明 |
+| 一口气拆解（输入已明确、要隔离重输出或并行批量，如一次补多个功能的AC） | 通用 subagent，prompt给 product-breakdown skill 路径+输入文件+一口气模式声明 |
 | 界面设计 | ui-designer |
 | 写代码/改代码 | code-writer |
 | 代码审查（工程视角：正确性/AC/设计系统/安全） | code-reviewer |
@@ -42,9 +35,9 @@
 
 ### mattpocock 工程流路由（编码轨内）
 
-- **触发方式实情**：`/grill-with-docs`、`/wayfinder`、`/setup-matt-pocock-skills` 只能手动斜杠触发；grilling、tdd、research、prototype、domain-modeling 带自动触发（含中文触发词）。撞车裁决：需求拆解归口不变（产品侧 product-breakdown / feature-breakdown），grilling 只接工程设计的把关拷问，不接产品结构梳理
-- **工程需求拷问**：动手前用 `/grill-with-docs`（连环追问，落 ADR 和 CONTEXT.md）。产品侧仍走 product-breakdown，两者不混
-- **大工程**（≥ 1000 行 / ≥ 20 文件，或超过一个会话装不下）：规划用 `/wayfinder`（工单地图，一张张解决）。首次使用前在目标项目跑一次 `/setup-matt-pocock-skills` 选 tracker，个人沙箱项目选本地 markdown。**大工程的编码必须完整遵循 tdd 红绿循环，无体量豁免**（前提是改动命中「写测试的场景」；纯 UI 样式、文案、配置这类按性质不写测试的场景，不因体量升级为要写测试，判据见下方「何时写测试」）
+- **触发方式实情**：grill-with-docs、wayfinder、setup-matt-pocock-skills 以 skill 方式加载触发；grilling、tdd、research、prototype、domain-modeling 带自动触发（含中文触发词）。撞车裁决：需求拆解归口不变（产品侧 product-breakdown / feature-breakdown），grilling 只接工程设计的把关拷问，不接产品结构梳理
+- **工程需求拷问**：动手前用 grill-with-docs skill（连环追问，落 ADR 和 CONTEXT.md）。产品侧仍走 product-breakdown，两者不混
+- **大工程**（≥ 1000 行 / ≥ 20 文件，或超过一个会话装不下）：规划用 wayfinder skill（工单地图，一张张解决）。首次使用前在目标项目跑一次 setup-matt-pocock-skills skill 选 tracker，个人沙箱项目选本地 markdown。**大工程的编码必须完整遵循 tdd 红绿循环，无体量豁免**（前提是改动命中「写测试的场景」；纯 UI 样式、文案、配置这类按性质不写测试的场景，不因体量升级为要写测试，判据见下方「何时写测试」）
 - **规格等价**：grill-with-docs 拷问产出的结论文档与 ADR、wayfinder 的工单，与 AC 文档（docs/pm-*-ac.md）互为等价规格。注意 CONTEXT.md 是术语表不是规格（domain-modeling 明文规定），所以拷问会话收尾必须把结论落成一份文档（目标、边界、验收要点，落 docs/ 或写进工单），派 code-writer 时给这份落盘物的路径，不必为已拷问清楚的工程需求再走一遍 product-breakdown
 - **调研分工**：查仓库、查文档、查 API 事实归 research skill（后台 agent，产出带引用的 repo 内 markdown）。不再使用 deep-research（2026-07-13 用户决定，调研统一走 research）
 
@@ -61,14 +54,14 @@
 
 - 真正的方向性决策（要不要做一个产品 / 一个大功能）、系统性商业论证、用户明确要战略评估
 - 每套方法执行完和用户确认再进下一套，确认发生在对话里，零交接成本
-- 查证项>2个时按skill里的规则打包派 general-purpose subagent 去搜，搜索刷屏隔离在外，结论带回主线
+- 查证项>2个时按skill里的规则打包派 通用 subagent 去搜，搜索刷屏隔离在外，结论带回主线
 
 **需求拆解 → 本体加载 product-breakdown skill 主线共创**：
 
 - 从0出产品骨架（阶段A，方法论 ooux-product-design）或细化功能拆解+AC（阶段B，方法论 feature-breakdown），每步和用户确认，确认一步落盘一步，中断不丢进度
 - 产出落盘 `docs/pm-<YYYYMMDD>-<slug>-structure.md` / `-ac.md`
 
-**一口气外派（general-purpose subagent + skill路径）**：
+**一口气外派（通用 subagent + skill路径）**：
 
 - 输入已明确（用户确认过的场景描述 / 已有structure文件）且产出重适合隔离，或多个独立拆解可并行（如structure确认后批量补5个功能的AC，同一条消息并行派5个）
 - prompt里给：product-breakdown skill 路径 + 输入文件路径 + 当天日期 + 一句「按一口气模式执行」
@@ -252,14 +245,14 @@
 
 - **先定 seam 再写测试**:测试只写在公共边界(seam)上。动手前列出要测的 seam 跟用户确认,没确认的 seam 不写测试。不追求全覆盖,测试预算花在关键路径和复杂逻辑上
 - **垂直切片**:一条失败测试→最小实现让它变绿→下一条。禁止一次把测试全写完再实现(horizontal slicing,它明令的反模式:批量测试验证的是想象中的行为)
-- **重构不进红绿循环**,归审查阶段(code-reviewer agent 或本体自检;tdd skill 原文提到的 code-review skill 在本体系的对应物就是 code-reviewer)。断言禁止 implementation-coupled(mock 内部协作者/测私有方法/绕过接口查数据库)和 tautological(用代码同样的算法算期望值),判据见 `~/.codex/skills/tdd/tests.md` 和 `mocking.md`
+- **重构不进红绿循环**,归审查阶段(code-reviewer agent 或本体自检;tdd skill 原文提到的 code-review skill 在本体系的对应物就是 code-reviewer)。断言禁止 implementation-coupled(mock 内部协作者/测私有方法/绕过接口查数据库)和 tautological(用代码同样的算法算期望值),判据见 `~/.claude/skills/tdd/tests.md` 和 `mocking.md`
 - **体量分级**:本体直改阈值内的小修复(单文件 < 500 行),且 seam 就是被修函数或接口本身、无歧义时,seam 自确认不必停等,汇报里说明测了哪个 seam 即可;大工程(≥ 1000 行 / ≥ 20 文件或 wayfinder 级)必须完整走 seam 确认和红绿循环,无豁免
 
 **谁写测试**：
 
 - **默认本体写**：按红绿循环,测试和实现在本体手里交替推进
 - **派 code-writer 的改动**：本体先按 AC 定 seam 写失败测试(红),工作包里给测试文件路径,writer 的完成标准是让测试变绿,writer 不许改测试
-- **改动非常大（≥ 1000 行 / ≥ 20 文件或 wayfinder 级）**：没有体量豁免。先用 /wayfinder 把大工程拆成工单,每张工单内按红绿循环推进（本体写 seam 失败测试,自己实现或派 writer 让测试变绿）。tdd 的垂直切片本来就把大工程切成小片,「太大所以并行批量写测试」是 horizontal slicing 反模式,禁止。旧的并行派测试 subagent 模板已随本条废除（2026-07-13,理由:批量黑盒测试验证的是想象中的行为,与 tdd 硬规则直接冲突）
+- **改动非常大（≥ 1000 行 / ≥ 20 文件或 wayfinder 级）**：没有体量豁免。先用 wayfinder skill 把大工程拆成工单,每张工单内按红绿循环推进（本体写 seam 失败测试,自己实现或派 writer 让测试变绿）。tdd 的垂直切片本来就把大工程切成小片,「太大所以并行批量写测试」是 horizontal slicing 反模式,禁止。旧的并行派测试 subagent 模板已随本条废除（2026-07-13,理由:批量黑盒测试验证的是想象中的行为,与 tdd 硬规则直接冲突）
 
 ### 什么情况下不需要完整流程
 

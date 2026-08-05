@@ -33,14 +33,14 @@
 3. 没按时间线铺页：页面顺序是学员的认知顺序，不是项目的制作顺序
 4. 新概念挂在旧认知上：每个新名词有一个学员大概率已知的类比或旧概念做锚
 5. 可运行：浏览器打开、左右键翻页正常、console无报错
-6. 版式底线：大标题无单字孤行，正文≥16px，移动端不横向滚动（细则见`~/.codex/rules/ui_engineering_baseline.md`）
+6. 版式底线：大标题无单字孤行，正文≥16px，移动端不横向滚动（细则见`~/.claude/rules/ui_engineering_baseline.md`）
 7. 页粒度按分镜：一页是1到2个分镜，一个知识点可以拆多页把它讲透（live-lesson-deck核心原则4）；时长按知识点算，一个知识点的分镜合计讲2到4分钟，超了砍知识点内容，不许靠把分镜挤回一页来压页数
 8. 素材真实：成品无占位块残留；拿不到的素材必须在汇报「待确认项」里逐个列明位置和需要什么，不许无声交付占位成片
-9. 界面文字过`~/.codex/skills/ui-copy-check/SKILL.md`七类：上墙讲课文字以teaching-voice口径优先，编辑器控件、tooltip、确认框文案按该清单查并给重写
+9. 界面文字过`~/.claude/skills/ui-copy-check/SKILL.md`七类：上墙讲课文字以teaching-voice口径优先，编辑器控件、tooltip、确认框文案按该清单查并给重写
 
 ### B2 B站文稿
 
-1. no_ai_style全部16条零违反（`~/.codex/rules/no_ai_style.md`，逐条过）
+1. no_ai_style全部16条零违反（`~/.claude/rules/no_ai_style.md`，逐条过）
 2. 开头30秒有具体的钩子：一个真实场景、一个反常识事实或一个演示结果，不是「今天我们来聊聊」
 3. 取舍：只留最有用的，删掉一切「顺便说一下」「值得一提」类的旁支
 4. 可朗读：每句话念出来不拗口，一口气念不完的长句拆短
@@ -57,7 +57,7 @@
 
 ### B4 代码
 
-见`~/.codex/rules/code_rules.md`四原则加目标项目自己的AGENTS.md，此处不重复。
+见`~/.claude/rules/code_rules.md`四原则加目标项目自己的AGENTS.md，此处不重复。
 
 ### B5 数据分析报告
 
