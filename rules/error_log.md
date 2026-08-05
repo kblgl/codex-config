@@ -39,3 +39,7 @@
 ### 15. Copy-Item 多源复制到不存在的目标会部分失败
 
 `Copy-Item -Path "src\*" -Destination "dst" -Recurse` 在 dst 不存在时会把 dst 当作文件路径，多个源项只成功一部分且报错混乱（Container cannot be copied onto existing leaf item）。批量复制目录应单源单目标逐个 `Copy-Item <src> <dst>`。
+
+### 16. 被质疑时用改口代替验证
+
+用户问"有没有更好的方案"时，因顺从对话流改口两次（第一次推出别名方案），未先验证原方案。正确顺序：质疑 → 先验证原方案 → 成立则坚持并说明理由；不成立才换方案。规则只能提高拦截率，不能根除行为倾向；连续重复的质疑不携带新信息时，结论不变。
