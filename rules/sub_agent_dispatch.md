@@ -14,7 +14,7 @@
 
 | 场景 | 归口 |
 |------|----------------|
-| 商业判断、功能建议、体验改进（产品策略类） | 本体加载 product-strategy skill 主线执行；查证项>2个打包派 general-purpose 去搜 |
+| 商业判断、功能建议、体验改进（产品策略类） | 本体加载 product-strategy skill 主线执行；查证项>2个打包派 通用 subagent（default 类型）去搜 |
 | 产品结构梳理、单功能拆解、补AC | 本体加载 product-breakdown skill 主线共创、每步确认每步落盘 |
 | 一口气拆解（输入已明确、要隔离重输出或并行批量，如一次补多个功能的AC） | 通用 subagent，prompt给 product-breakdown skill 路径+输入文件+一口气模式声明 |
 | 界面设计 | ui-designer |
@@ -247,7 +247,7 @@
 
 - **先定 seam 再写测试**:测试只写在公共边界(seam)上。动手前列出要测的 seam 跟用户确认,没确认的 seam 不写测试。不追求全覆盖,测试预算花在关键路径和复杂逻辑上
 - **垂直切片**:一条失败测试→最小实现让它变绿→下一条。禁止一次把测试全写完再实现(horizontal slicing,它明令的反模式:批量测试验证的是想象中的行为)
-- **重构不进红绿循环**,归审查阶段(code-reviewer agent 或本体自检;tdd skill 原文提到的 code-review skill 在本体系的对应物就是 code-reviewer)。断言禁止 implementation-coupled(mock 内部协作者/测私有方法/绕过接口查数据库)和 tautological(用代码同样的算法算期望值),判据见 `~/.claude/skills/tdd/tests.md` 和 `mocking.md`
+- **重构不进红绿循环**,归审查阶段(code-reviewer agent 或本体自检;tdd skill 原文提到的 code-review skill 在本体系的对应物就是 code-reviewer)。断言禁止 implementation-coupled(mock 内部协作者/测私有方法/绕过接口查数据库)和 tautological(用代码同样的算法算期望值),判据见 `~/.codex/skills/tdd/tests.md` 和 `mocking.md`
 - **体量分级**:本体直改阈值内的小修复(单文件 < 500 行),且 seam 就是被修函数或接口本身、无歧义时,seam 自确认不必停等,汇报里说明测了哪个 seam 即可;大工程(≥ 1000 行 / ≥ 20 文件或 wayfinder 级)必须完整走 seam 确认和红绿循环,无豁免
 
 **谁写测试**：
@@ -263,7 +263,7 @@
 | 纯产品idea/商业判断/功能建议/体验思考 | 本体先给第一手判断；够重才进 product-strategy skill，且不进入实现 |
 | 纯需求拆解（用户只要拆解结果不进开发） | 边界清楚的轻量拆解本体直接列；够重则本体加载 product-breakdown 主线共创，按需走阶段A或B |
 | 用户只要产品骨架（对象/页面/数据模型，不细化具体功能） | product-breakdown 阶段A主线共创，停在数据模型草案 |
-| 用户已有产品骨架，只补单功能拆解 | product-breakdown 阶段B主线共创；输入明确或批量并行时一口气外派 general-purpose |
+| 用户已有产品骨架，只补单功能拆解 | product-breakdown 阶段B主线共创；输入明确或批量并行时一口气外派 通用 subagent（default 类型） |
 | 纯bug修复（< 500 行 / 单文件） | 本体直接改 + 自检；涉及界面时按条件判断 ux-reviewer |
 | 较大 bug 修复（≥ 500 行 / 多文件） | code-writer → 按条件判断 code-reviewer + ux-reviewer |
 | 纯样式微调（配色、间距、单文件小改） | 本体直接改 + 自检 |
