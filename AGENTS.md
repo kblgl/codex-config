@@ -13,7 +13,7 @@
 
 ## 任务 preflight（最高优先级，所有任务的第 0 步）
 
-收到具体任务后、调用任何工具前，必须先做这两件事：
+收到具体任务后、调用任何工具前，必须先执行以下步骤：
 
 1. **检查目标项目的 AGENTS.md**：当前 cwd 或目标路径所在项目根目录有 `AGENTS.md` 吗？
    - **没有**：停下，向用户提议建项目 AGENTS.md，确认建完再动手。**禁止**用全局 AGENTS.md 或父目录 AGENTS.md（如工作区级）替代项目级规范，它们的覆盖面不同。
@@ -66,16 +66,19 @@
 
 本体攥住主线，重活和可并行的独立工作包委派给 subagent；产品策略和需求拆解类的强交互工作由本体加载对应 skill（product-strategy / product-breakdown）主线执行。**编码类**工作哪些活怎么分、完整流程顺序、何时跳过，唯一权威是 `~/.codex/rules/sub_agent_dispatch.md`；**内容生产类**（课件、答疑归档、文稿、知识库、数据分析）的调度权威是 `~/.codex/personal-ai-os/dispatch.md`。本文件不另设标准。
 
-Codex 侧的执行方式：编码类工作按 `~/.codex/agents/` 下定义的自定义 agent 委派——`code-writer`（实现）、`code-reviewer`（代码审查）、`ui-designer`（界面方案）、`ux-reviewer`（体验审查）。需要并行时，在委派指令里点名对应 agent 名称，让 Codex 以子代理方式并行运行并汇总结果；两个 reviewer 独立产出，由本体合并。
+Codex 侧的执行方式：编码类工作按 `~/.codex/agents/` 下定义的自定义 agent 委派——`code-writer`（实现）、`code-reviewer`（代码审查）、`ui-designer`（界面方案）、`ux-reviewer`（体验审查）。需要并行时，在委派指令里点名对应 agent 名称，让 Codex 以子代理方式并行运行并汇总结果；两个 reviewer 独立产出，由本体合并。**并行仅限不同类型（如 code-writer + code-reviewer + ui-designer），同类型必须串行，禁止并发派两个同类代理（见 sub_agent_dispatch.md）**。
 
 ## 规则清单
 
 - `~/.codex/rules/no_ai_style.md` — 禁用AI腔表达。**每次对话开始时必须 Read**
 - `~/.codex/rules/error_log.md` — 历史错误提炼的强制规则。**每次对话开始时必须 Read**
 - `~/.codex/rules/code_rules.md` — 编码行为准则（先思考、简单优先、外科手术式改动、目标驱动）。**涉及写代码/改代码的任务开始前必须 Read**
+- `~/.codex/rules/sub_agent_dispatch.md` — 子代理调度规则（何时派、归口、完整流程、reviewer 触发线）。**编码类委派的唯一权威，派工前 Read**
 - `~/.codex/personal-ai-os/SYSTEM.md` — 个人AI操作系统总纲。**内容生产类任务开始前必须 Read**
 - `~/.codex/rules/feishu_doc_write.md` — 飞书文档写入规则、约束与调用流程
 - `~/.codex/rules/ui_engineering_baseline.md` — 前端工程正确性底线清单，ui-designer/code-reviewer 按需 Read
+- `~/.codex/rules/cn_typography.md` — 中文排版字体补充规则，中文页面/中文营销页按需 Read
+- `~/.codex/rules/design_template.md` — 设计模板，ui-designer 按需 Read
 
 ## 测试
 
