@@ -27,3 +27,15 @@
 ### 12. 凭记忆陈述规则归属导致串文件
 
 全局 AGENTS.md 与工作区 AGENTS.md 职责不同，凭记忆引用内容已两次串文件（委派章节、同步脚本约定）。凡涉及规则归属陈述，必须先 Read 或 grep 对应文件核实，禁止凭记忆作答。
+
+### 13. TOML 三引号字符串内 Windows 路径反斜杠是非法转义
+
+在 TOML 的 `"""..."""` 字符串里写 `C:\Users\...` 会产生 `\1`、`\.` 等非法转义，整个配置文件解析失败、agent 类型加载失效。路径一律用正斜杠（`C:/...`）或 `~` 写法（`~/.codex/...`）。
+
+### 14. git push 必须检查退出码，失败不能静默
+
+同步脚本 push 后未检查 `$LASTEXITCODE`，网络抖动导致推送失败时日志仍写"已推送"、以成功状态退出，实际远程没有新提交。所有 git 写操作（commit/push）后必须检查退出码，push 失败要重试并明确报错。
+
+### 15. Copy-Item 多源复制到不存在的目标会部分失败
+
+`Copy-Item -Path "src\*" -Destination "dst" -Recurse` 在 dst 不存在时会把 dst 当作文件路径，多个源项只成功一部分且报错混乱（Container cannot be copied onto existing leaf item）。批量复制目录应单源单目标逐个 `Copy-Item <src> <dst>`。
